@@ -1,5 +1,6 @@
 package org.myapp.mercury.application.model.entity.geography;
 
+import java.util.HashSet;
 import java.util.Set;
 import org.myapp.mercury.application.model.entity.geography.Point;
 import org.myapp.mercury.application.model.entity.base.AbstractEntity;
@@ -60,4 +61,11 @@ public class City extends AbstractEntity {
 		this.deliveryPoint = deliveryPoint;
 	}
 
+	public void addDeliveryPoint(final Point point) {
+		if (deliveryPoint == null) {
+			deliveryPoint = new HashSet<Point>();
+		}
+		deliveryPoint.add(point);
+		point.setCity(this);
+	}
 }
