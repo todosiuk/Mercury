@@ -1,5 +1,7 @@
 package org.myapp.mercury.application.model.entity.geography;
 
+import java.util.Objects;
+
 import org.myapp.mercury.application.model.entity.base.AbstractEntity;
 import org.myapp.mercury.application.model.entity.transport.TransportType;
 import org.myapp.mercury.application.model.entity.geography.Coordinate;
@@ -11,6 +13,19 @@ import org.myapp.mercury.application.model.entity.geography.Coordinate;
  *
  */
 public class Point extends AbstractEntity {
+	
+	/**
+     * You shouldn't create point object directly. Use
+     * {@link City} functionality instead
+     * @param city
+     * @param transportType
+     */
+
+	public Point(final City city, final TransportType transportType) {
+		this.city = Objects.requireNonNull(city);
+		this.transportType = Objects.requireNonNull(transportType);
+	}
+
 	private City city;
 
 	private String phone;

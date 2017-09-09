@@ -5,11 +5,7 @@
 	<artifactId>Mercury</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<modules>
-		<module>mercury-presentation</module>
-		<module>mercury-model</module>
-		<module>mercury-persistence</module>
-	</modules>
+
 	<properties>
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
