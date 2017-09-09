@@ -1,8 +1,10 @@
 package org.myapp.mercury.application.model.entity.geography;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import org.myapp.mercury.application.model.entity.geography.Point;
+import org.myapp.mercury.application.model.entity.transport.TransportType;
 import org.myapp.mercury.application.model.entity.base.AbstractEntity;
 
 /**
@@ -13,6 +15,10 @@ import org.myapp.mercury.application.model.entity.base.AbstractEntity;
  */
 public class City extends AbstractEntity {
 
+	public City(final String name) {
+		this.name = name;
+	}
+
 	private String name;
 
 	/**
@@ -20,8 +26,8 @@ public class City extends AbstractEntity {
 	 */
 	private String district;
 	/**
-	 * Name of the region where district is located. Region is top- level area
-	 * in the country
+	 * Name of the region where district is located. Region is top- level area in
+	 * the country
 	 */
 	private String region;
 	/**
@@ -61,11 +67,31 @@ public class City extends AbstractEntity {
 		this.deliveryPoint = deliveryPoint;
 	}
 
-	public void addDeliveryPoint(final Point point) {
+	/**
+	 * Adds specified delivery point to the city point list
+	 * 
+	 * @param point
+	 */
+	public Point addDeliveryPoint(final TransportType transportType) {
 		if (deliveryPoint == null) {
 			deliveryPoint = new HashSet<Point>();
 		}
+		Point point = new Point(this, transportType);
 		deliveryPoint.add(point);
-		point.setCity(this);
+		return point;
 	}
+
+	/**
+	 * Remove delivery point
+	 * 
+	 * @param point
+	 */
+
+	public void removePointSuccess(Point point) {
+		Objects.requireNonNull(point, "point parameter is not initialized");
+		if (point != null) {
+			deliveryPoint.remove(point);
+		}
+	}
+
 }
