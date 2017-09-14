@@ -35,11 +35,16 @@ public class SupplierTest {
 	}
 
 	@Test
-	public void testRemoveSupplySrccess() {
+	public void testRemoveSupplySuccess() {
 		Supply supply = supplier.addSupply("AA2530JJ");
 		supplier.removeSupply(supply);
 		assertTrue(supplier.getSupplyList().isEmpty());
+	}
 
+	@Test(expected = NullPointerException.class)
+	public void testRemoveNullSupplyFailure() {
+		supplier.removeSupply(null);
+		assertTrue(false);
 	}
 
 	private boolean containsSupply(Supplier supplier, Supply supply) {
