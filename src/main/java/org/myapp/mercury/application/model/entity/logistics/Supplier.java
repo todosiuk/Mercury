@@ -2,6 +2,7 @@ package org.myapp.mercury.application.model.entity.logistics;
 
 import java.awt.List;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.myapp.mercury.application.model.entity.base.AbstractEntity;
@@ -51,7 +52,14 @@ public class Supplier extends AbstractEntity {
 		supplyList.add(supply);
 		return supply;
 	}
+
 	/**
 	 * Remove supply
 	 */
+	public void removeSupply(Supply supply) {
+		Objects.requireNonNull(supply, "Supply parameter is not initialized");
+		if (supply != null) {
+			supplyList.remove(supply);
+		}
+	}
 }

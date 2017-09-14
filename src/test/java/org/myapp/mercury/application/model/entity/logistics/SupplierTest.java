@@ -33,7 +33,14 @@ public class SupplierTest {
 		supplier.addSupply(null);
 		assertTrue(false);
 	}
-	
+
+	@Test
+	public void testRemoveSupplySrccess() {
+		Supply supply = supplier.addSupply("AA2530JJ");
+		supplier.removeSupply(supply);
+		assertTrue(supplier.getSupplyList().isEmpty());
+
+	}
 
 	private boolean containsSupply(Supplier supplier, Supply supply) {
 		return supplier.getSupplyList().contains(supply);
