@@ -4,7 +4,7 @@ import javax.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
-@ApplicationPath("api")
+@ApplicationPath(value = "api")
 
 /**
  * REST web-service configuration for Jersey
