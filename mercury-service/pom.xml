@@ -9,15 +9,15 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>mercury-service</artifactId>
-
 	<dependencyManagement>
 		<dependencies>
 			<!-- https://mvnrepository.com/artifact/org.glassfish.jersey/jersey-bom -->
 			<dependency>
 				<groupId>org.glassfish.jersey</groupId>
 				<artifactId>jersey-bom</artifactId>
-				<version>2.25.1</version>
+				<version>${jersey.version}</version>
 				<type>pom</type>
+				<scope>import</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -50,7 +50,5 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.26</version>
 		</dependency>
-
 	</dependencies>
-	<packaging>pom</packaging>
 </project>
