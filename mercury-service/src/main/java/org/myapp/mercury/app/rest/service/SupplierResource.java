@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.common.collect.Lists;
 
-@Path(value = "suppliers")
+@Path("suppliers")
 /**
  * {@link SupplierResource} is REST web-service that handles supplier-related
  * requests
