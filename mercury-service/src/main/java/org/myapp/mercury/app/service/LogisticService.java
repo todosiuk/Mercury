@@ -12,18 +12,20 @@ import org.myapp.mercury.app.model.entity.logistic.Supplier;
  */
 public interface LogisticService {
 
-	/**
-	 * Returns list of existing suppliers
-	 * 
-	 * @return
-	 */
+	Supplier findById(long id);
+
+	Supplier findByName(String name);
+
+	void updateSupplier(Supplier supplier);
+
+	void deleteSupplierById(long id);
+
+	void deleteAllSuppliers();
+
+	public boolean isSupplierExist(Supplier supplier);
+
 	List<Supplier> findSuppliers();
 
-	/**
-	 * Saves specified supplier instance
-	 * 
-	 * @param supplier
-	 */
 	void saveSupplier(Supplier supplier);
 
 }
