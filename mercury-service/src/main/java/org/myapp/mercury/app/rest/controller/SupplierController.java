@@ -13,19 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController("/api")
+@RestController
+@RequestMapping(value = "/api")
 public class SupplierController {
 
 	@Autowired
 	LogisticService logisticService;
 
-	@RequestMapping(value = "suppliers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Supplier>> findSuppliers() {
+	@RequestMapping(value = "/suppliers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Supplier findSuppliers() {
 
-		List<Supplier> suppliers = logisticService.findSuppliers();
-		if (suppliers.isEmpty()) {
-			return new ResponseEntity<List<Supplier>>(HttpStatus.NO_CONTENT);
-		}
-		return new ResponseEntity<List<Supplier>>(suppliers, HttpStatus.OK);
+		Supplier sup = logisticService.findSuppliers();
+		return sup;
 	}
 }

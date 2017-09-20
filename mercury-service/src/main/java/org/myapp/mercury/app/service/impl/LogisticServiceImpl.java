@@ -18,8 +18,12 @@ public class LogisticServiceImpl implements LogisticService {
 	}
 
 	@Override
-	public List<Supplier> findSuppliers() {
-		return CommonUtil.getSafeList(suppliers);
+	public Supplier findSuppliers() {
+		Supplier sup = new Supplier();
+		sup.setId(5);
+		sup.setName("ADR");
+		return sup;
+		// return CommonUtil.getSafeList(suppliers);
 	}
 
 	@Override

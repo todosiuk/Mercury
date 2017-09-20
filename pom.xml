@@ -6,30 +6,25 @@
 	<artifactId>Mercury</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<modules>
 		<module>mercury-model</module>
-		<module>mercury-persistence</module>
-		<module>mercury-presentation</module>
 		<module>mercury-service</module>
+		<module>mercury-presentation</module>
 	</modules>
-
 	<properties>
 		<java.version>1.8</java.version>
 		<junit.version>4.12</junit.version>
-		<spring.version>4.3.10.RELEASE</spring.version>
+		<springframework.version>4.3.10.RELEASE</springframework.version>
 		<jackson.version>2.8.8</jackson.version>
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -48,16 +43,15 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.4</version>
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<downloadJavadocs>true</downloadJavadocs>
-					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-</project>
+	</project>
