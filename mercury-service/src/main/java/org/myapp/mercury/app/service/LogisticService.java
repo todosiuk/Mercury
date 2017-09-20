@@ -24,7 +24,7 @@ public interface LogisticService {
 
 	public boolean isSupplierExist(Supplier supplier);
 
-	List<Supplier> findSuppliers();
+	Supplier findSuppliers();
 
 	void saveSupplier(Supplier supplier);
 
