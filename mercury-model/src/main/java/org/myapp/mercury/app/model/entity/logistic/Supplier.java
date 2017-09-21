@@ -23,10 +23,6 @@ public class Supplier extends AbstractEntity {
 		this.name = name;
 	}
 
-	public Supplier() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public String getName() {
 		return name;
 	}

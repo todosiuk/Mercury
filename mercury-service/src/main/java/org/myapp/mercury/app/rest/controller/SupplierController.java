@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
+
 @RestController
 @RequestMapping(value = "/api")
 public class SupplierController {
@@ -21,9 +23,7 @@ public class SupplierController {
 	LogisticService logisticService;
 
 	@RequestMapping(value = "/suppliers", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Supplier findSuppliers() {
-
-		Supplier sup = logisticService.findSuppliers();
-		return sup;
+	public List<String> findSuppliers() {
+		return null;
 	}
 }
