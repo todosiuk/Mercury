@@ -16,9 +16,18 @@
 		<junit.version>4.12</junit.version>
 		<springframework.version>4.3.10.RELEASE</springframework.version>
 		<jackson.version>2.8.8</jackson.version>
+		<el.version>2.2.4</el.version>
 	</properties>
 
 	<dependencies>
+
+		<!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -54,4 +63,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	</project>
+</project>

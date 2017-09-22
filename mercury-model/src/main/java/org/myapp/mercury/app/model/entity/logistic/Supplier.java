@@ -19,12 +19,9 @@ public class Supplier extends AbstractEntity {
 	private Set<Supply> supplyList;
 
 	public Supplier(String name) {
-		super();
-		this.name = name;
 	}
 
 	public Supplier() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {
