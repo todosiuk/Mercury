@@ -18,4 +18,8 @@ public abstract class AppException extends RuntimeException {
 		super(message);
 	}
 
+	public AppException(Throwable throwable) {
+		super(throwable);
+	}
+
 }
