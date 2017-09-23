@@ -17,6 +17,7 @@
 		<junit.version>4.12</junit.version>
 		<springframework.version>4.3.10.RELEASE</springframework.version>
 		<jackson.version>2.8.8</jackson.version>
+		<hibernate.version>5.2.0.Final</hibernate.version>
 	</properties>
 
 	<dependencies>

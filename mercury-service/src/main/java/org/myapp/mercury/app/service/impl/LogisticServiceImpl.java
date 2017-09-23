@@ -20,20 +20,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogisticServiceImpl implements LogisticService {
 
-	private final List<Supplier> suppliers;
+	private final SupplierRepository supplierRepository;
 
-	/**
-	 * Auto-increment counter for entity id generation
-	 */
-	private int counter = 0;
+	
 
 	public LogisticServiceImpl() {
-		suppliers = new ArrayList<Supplier>();
+		supplierRepository = new InMemorySupplierRepository();
 	}
 
 	@Override
 	public List<Supplier> findSuppliers() {
-		return CommonUtil.getSafeList(suppliers);
+		return supplierRepository.findAll();
 	}
 
 	@Override
