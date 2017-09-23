@@ -1,10 +1,13 @@
 package org.myapp.mercury.transform.impl;
 
 import org.myapp.mercury.app.infrastructure.util.Checks;
+import org.myapp.mercury.app.infrastructure.util.CommonUtil;
 import org.myapp.mercury.app.infrastructure.util.ReflectionUtil;
 import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 import org.myapp.mercury.app.rest.dto.base.BaseDTO;
 import org.myapp.mercury.transform.Transformer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Default transformation engine that uses reflection to transform objects
@@ -13,6 +16,7 @@ import org.myapp.mercury.transform.Transformer;
  *
  */
 public class DTOTransformer implements Transformer {
+	private static final Logger LOGGER = LoggerFactory.getLogger(DTOTransformer.class);
 
 	@Override
 	public <T extends AbstractEntity, P extends BaseDTO<T>> P transform(final T entity, final Class<P> clz) {
@@ -39,6 +43,10 @@ public class DTOTransformer implements Transformer {
 
 		ReflectionUtil.copyFields(dto, entity, ReflectionUtil.findSimilarFields(dto.getClass(), clz));
 		dto.untransform(entity);
+
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("SimpleDTOTransformer.transform: {} entity", CommonUtil.toString(dto));
+		}
 
 		return entity;
 	}
