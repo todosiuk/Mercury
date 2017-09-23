@@ -1,8 +1,12 @@
 package org.myapp.mercury.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
+import org.myapp.mercury.app.model.entity.logistic.Supply;
+import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
+import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
 
 /**
  * Entry point to perform operation over supplier entities
@@ -12,20 +16,12 @@ import org.myapp.mercury.app.model.entity.logistic.Supplier;
  */
 public interface LogisticService {
 
-	Supplier findById(long id);
-
-	Supplier findByName(String name);
-
-	void updateSupplier(Supplier supplier);
-
-	void deleteSupplierById(long id);
-
-	void deleteAllSuppliers();
-
-	public boolean isSupplierExist(Supplier supplier);
-
 	List<Supplier> findSuppliers();
 
+	Optional<Supplier> findSupplierById(int id);
+
 	void saveSupplier(Supplier supplier);
+
+	List<Supply> findSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria);
 
 }

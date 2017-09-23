@@ -33,7 +33,8 @@ public class LogisticServiceImplTest {
 
 	@Test
 	public void testSaveNewSupplierSuccess() {
-		Supplier supplier = new Supplier("Epic");
+		Supplier supplier = new Supplier();
+		supplier.setName("Epic");
 		service.saveSupplier(supplier);
 
 		List<Supplier> suppliers = service.findSuppliers();
