@@ -1,7 +1,5 @@
 package org.myapp.mercury.app.model.search.criteria;
 
-import org.myapp.mercury.app.model.entity.logistic.Supplier;
-
 /**
  * Filtering criteria for search operation
  * 
@@ -18,7 +16,7 @@ public class SupplyCriteria {
 	private String documentReceiving;
 	private String department;
 	private String storekeeper;
-	private Supplier supplier;
+	private String supplierName;
 
 	public String getCarNumber() {
 		return carNumber;
@@ -76,12 +74,14 @@ public class SupplyCriteria {
 		this.storekeeper = storekeeper;
 	}
 
-	public Supplier getSupplier() {
-		return supplier;
+	public String getSupplierName() {
+		return supplierName;
 	}
 
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
 	}
+
+	
 
 }

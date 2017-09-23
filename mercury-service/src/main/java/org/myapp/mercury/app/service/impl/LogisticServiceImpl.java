@@ -1,8 +1,11 @@
 package org.myapp.mercury.app.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import org.apache.commons.lang3.StringUtils;
@@ -49,8 +52,18 @@ public class LogisticServiceImpl implements LogisticService {
 
 	@Override
 	public List<Supply> findSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		Stream<Supplier> stream = suppliers.stream()
+				.filter((supplier) -> StringUtils.isEmpty(criteria.getSupplierName())
+						|| supplier.getName().equals(criteria.getSupplierName()));
+	
 
-}
+	Optional<Set<Supply>> supplyes = stream.map((supplier) -> supplier.getSupplyList()).reduce((supply1, supply2)->{
+        Set<Supply> newSupply = new HashSet<>(supply2);
+        newSupply.addAll(supply1);
+        return newSupply;
+ });if(!supplyes.isPresent())
+	{
+		return Collections.emptyList();
+	}return supplyes.get().stream().filter((supply)->criteria.getTransportType()==null||station.getTransportType()==criteria.getTransportType()).collect(Collectors.toList());
+
+}}

@@ -6,12 +6,5 @@
 		<artifactId>Mercury</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>mercury-persistence</artifactId>
-	<dependencies>
-		<dependency>
-			<groupId>org.myapp</groupId>
-			<artifactId>mercury-model</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
-	</dependencies>
+	<artifactId>mercury-model</artifactId>
 </project>
