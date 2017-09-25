@@ -1,19 +1,15 @@
 package org.myapp.mercury.app.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Stream;
-
-import org.apache.commons.lang3.StringUtils;
-import org.myapp.mercury.app.infrastructure.util.CommonUtil;
+import java.util.stream.Collectors;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
+import org.myapp.mercury.app.persistence.repository.SupplierRepository;
 import org.myapp.mercury.app.service.LogisticService;
 import org.springframework.stereotype.Component;
 
@@ -22,10 +18,8 @@ public class LogisticServiceImpl implements LogisticService {
 
 	private final SupplierRepository supplierRepository;
 
-	
-
-	public LogisticServiceImpl() {
-		supplierRepository = new InMemorySupplierRepository();
+	public LogisticServiceImpl(SupplierRepository supplierRepository) {
+		this.supplierRepository = supplierRepository;
 	}
 
 	@Override
@@ -35,32 +29,18 @@ public class LogisticServiceImpl implements LogisticService {
 
 	@Override
 	public void saveSupplier(Supplier supplier) {
-		if (!suppliers.contains(supplier)) {
-			supplier.setId(++counter);
-			suppliers.add(supplier);
-		}
-
+		supplierRepository.save(supplier);
 	}
 
 	@Override
 	public Optional<Supplier> findSupplierById(final int id) {
-		return suppliers.stream().filter((supplier) -> supplier.getId() == id).findFirst();
+		return Optional.ofNullable(supplierRepository.findById(id));
 	}
 
 	@Override
-	public List<Supply> findSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
-		Stream<Supplier> stream = suppliers.stream()
-				.filter((supplier) -> StringUtils.isEmpty(criteria.getSupplierName())
-						|| supplier.getName().equals(criteria.getSupplierName()));
-	
-
-	Optional<Set<Supply>> supplyes = stream.map((supplier) -> supplier.getSupplyList()).reduce((supply1, supply2)->{
-        Set<Supply> newSupply = new HashSet<>(supply2);
-        newSupply.addAll(supply1);
-        return newSupply;
- });if(!supplyes.isPresent())
-	{
-		return Collections.emptyList();
-	}return supplyes.get().stream().filter((supply)->criteria.getTransportType()==null||station.getTransportType()==criteria.getTransportType()).collect(Collectors.toList());
-
-}}
+	public List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
+		Set<Supply> supplies = new HashSet<>();
+		supplierRepository.findAll().forEach(supplier -> supplies.addAll(supplier.getSupplyList()));
+		return supplies.stream().filter(supply -> supply.match(criteria)).collect(Collectors.toList());
+	}
+}

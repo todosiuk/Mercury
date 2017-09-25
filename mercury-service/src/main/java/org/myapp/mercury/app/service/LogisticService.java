@@ -22,6 +22,6 @@ public interface LogisticService {
 
 	void saveSupplier(Supplier supplier);
 
-	List<Supply> findSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria);
+	List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria);
 
 }

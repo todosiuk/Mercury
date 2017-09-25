@@ -4,6 +4,13 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 
 /**
@@ -12,6 +19,8 @@ import org.myapp.mercury.app.model.entity.base.AbstractEntity;
  * @author todosuk
  *
  */
+@Entity
+@Table(name = "SUPPLIER")
 public class Supplier extends AbstractEntity {
 
 	private String name;
@@ -24,6 +33,7 @@ public class Supplier extends AbstractEntity {
 	public Supplier() {
 	}
 
+	@Column(name = "NAME", nullable = false, length = 32)
 	public String getName() {
 		return name;
 	}
@@ -32,6 +42,7 @@ public class Supplier extends AbstractEntity {
 		this.name = name;
 	}
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "supplier", orphanRemoval = true)
 	public Set<Supply> getSupplyList() {
 		return supplyList;
 	}

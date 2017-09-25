@@ -2,6 +2,15 @@ package org.myapp.mercury.app.model.entity.base;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToOne;
+
 import org.myapp.mercury.app.model.entity.person.Account;
 
 /**
@@ -10,7 +19,7 @@ import org.myapp.mercury.app.model.entity.person.Account;
  * @author Â
  *
  */
-
+@MappedSuperclass
 public abstract class AbstractEntity {
 	/**
 	 * Unique entity identifier
@@ -33,6 +42,8 @@ public abstract class AbstractEntity {
 	 */
 	private Account modifiedBy;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}
@@ -41,6 +52,7 @@ public abstract class AbstractEntity {
 		this.id = id;
 	}
 
+	@Column(name = "FIRST_CREATED", nullable = false, updatable = false)
 	public LocalDateTime getFirstCreated() {
 		return firstCreated;
 	}
@@ -49,6 +61,7 @@ public abstract class AbstractEntity {
 		this.firstCreated = firstCreated;
 	}
 
+	@Column(name = "LAST_MODIFIED", insertable = false)
 	public LocalDateTime getLastModified() {
 		return LastModified;
 	}
@@ -57,6 +70,8 @@ public abstract class AbstractEntity {
 		LastModified = lastModified;
 	}
 
+	@OneToOne(fetch = FetchType.LAZY, cascade = {})
+	@JoinColumn(name = "CREATED_BY", updatable = false)
 	public Account getCreatedBy() {
 		return createdBy;
 	}
@@ -65,6 +80,8 @@ public abstract class AbstractEntity {
 		this.createdBy = createdBy;
 	}
 
+	@OneToOne(fetch = FetchType.LAZY, cascade = {})
+	@JoinColumn(name = "MODIFIED_BY", insertable = false)
 	public Account getModifiedBy() {
 		return modifiedBy;
 	}
