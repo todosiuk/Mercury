@@ -1,4 +1,4 @@
-package org.myapp.mercury.app.persistence.repository.hibernate;
+package org.myapp.mercury.app.persistence.repository.impl;
 
 import java.util.List;
 
@@ -13,11 +13,11 @@ import org.myapp.mercury.app.persistence.repository.SupplierRepository;
  * @author todosuk
  *
  */
-public class HibernateSupplierRepository implements SupplierRepository {
+public class SupplierRepositoryImpl implements SupplierRepository {
 
 	private final SessionFactory sessionFactory;
 
-	public HibernateSupplierRepository(SessionFactoryBuilder builder) {
+	public SupplierRepositoryImpl(SessionFactoryBuilder builder) {
 		sessionFactory = builder.getSessionFactory();
 	}
 
