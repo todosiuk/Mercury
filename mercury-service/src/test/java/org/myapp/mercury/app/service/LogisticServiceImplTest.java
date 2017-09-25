@@ -20,10 +20,7 @@ public class LogisticServiceImplTest {
 
 	private LogisticService service;
 
-	@Before
-	public void setup() {
-		service = new LogisticServiceImpl();
-	}
+	
 
 	@Test
 	public void testNoDataReturnedAtStart() {
