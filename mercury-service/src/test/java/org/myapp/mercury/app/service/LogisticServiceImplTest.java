@@ -1,14 +1,8 @@
 package org.myapp.mercury.app.service;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.myapp.mercury.app.model.entity.logistic.Supplier;
-import org.myapp.mercury.app.service.LogisticService;
+import org.junit.runner.RunWith;
 import org.myapp.mercury.app.service.impl.LogisticServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Contain unit- tests for {@link LogisticServiceImpl}
@@ -16,26 +10,10 @@ import org.myapp.mercury.app.service.impl.LogisticServiceImpl;
  * @author todosuk
  *
  */
+
 public class LogisticServiceImplTest {
 
-	private LogisticService service;
+	@Autowired
+	private LogisticServiceImpl service;
 
-	
-
-	@Test
-	public void testNoDataReturnedAtStart() {
-		List<Supplier> suppliers = (List<Supplier>) service.findSuppliers();
-		assertTrue(suppliers.isEmpty());
-	}
-
-	@Test
-	public void testSaveNewSupplierSuccess() {
-		Supplier supplier = new Supplier();
-		supplier.setName("Epic");
-		service.saveSupplier(supplier);
-
-		List<Supplier> suppliers = (List<Supplier>) service.findSuppliers();
-		assertEquals(suppliers.size(), 1);
-		assertEquals(suppliers.get(0).getName(), "Epic");
-	}
 }

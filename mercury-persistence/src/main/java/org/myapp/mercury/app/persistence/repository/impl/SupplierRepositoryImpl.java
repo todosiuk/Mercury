@@ -3,7 +3,6 @@ package org.myapp.mercury.app.persistence.repository.impl;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.myapp.mercury.app.infrastructure.util.CommonUtil;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.persistence.repository.SupplierRepository;
 import org.slf4j.Logger;
@@ -50,8 +49,7 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 		return suppliers;
 	}
 
-	public Supplier updateSupplier(Supplier supplier) {
+	public void updateSupplier(Supplier supplier) {
 		manager.merge(supplier);
-		return supplier;
 	}
 }

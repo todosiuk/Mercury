@@ -9,21 +9,28 @@ import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
-import org.myapp.mercury.app.persistence.repository.SupplierRepository;
+import org.myapp.mercury.app.persistence.repository.impl.SupplierRepositoryImpl;
 import org.myapp.mercury.app.service.LogisticService;
-import org.springframework.stereotype.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Component
+@Service
+@Transactional
 public class LogisticServiceImpl implements LogisticService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(SupplierRepositoryImpl.class);
+	
+	@Autowired
+	private final SupplierRepositoryImpl supplierRepository;
 
-	private final SupplierRepository supplierRepository;
-
-	public LogisticServiceImpl(SupplierRepository supplierRepository) {
+	public LogisticServiceImpl(SupplierRepositoryImpl supplierRepository) {
 		this.supplierRepository = supplierRepository;
 	}
 
 	@Override
-	public List<?> findSuppliers() {
+	public List<Supplier> findSuppliers() {
 		return supplierRepository.findAll();
 	}
 
@@ -42,5 +49,14 @@ public class LogisticServiceImpl implements LogisticService {
 		Set<Supply> supplies = new HashSet<>();
 		supplierRepository.findAll().forEach(supplier -> supplies.addAll(((Supplier) supplier).getSupplyList()));
 		return supplies.stream().filter(supply -> supply.match(criteria)).collect(Collectors.toList());
+	}
+
+	public void deleteSupplier(int supplierId) {
+		supplierRepository.delete(supplierId);
+	}
+
+	public void updateSupplier(Supplier supplier) {
+		supplierRepository.updateSupplier(supplier);
+
 	}
 }

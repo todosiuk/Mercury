@@ -43,7 +43,7 @@ public class DTOTransformerTest {
 
 	@Test(expected = InvalidParameterException.class)
 	public void testTransformNullDTOClassFailure() {
-		transformer.transform(new Supplier("ANP"), null);
+		transformer.transform(new Supplier(), null);
 	}
 
 	@Test
