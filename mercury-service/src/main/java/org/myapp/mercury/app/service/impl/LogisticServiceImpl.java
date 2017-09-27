@@ -23,7 +23,7 @@ public class LogisticServiceImpl implements LogisticService {
 	}
 
 	@Override
-	public List<Supplier> findSuppliers() {
+	public List<?> findSuppliers() {
 		return supplierRepository.findAll();
 	}
 
@@ -40,7 +40,7 @@ public class LogisticServiceImpl implements LogisticService {
 	@Override
 	public List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
 		Set<Supply> supplies = new HashSet<>();
-		supplierRepository.findAll().forEach(supplier -> supplies.addAll(supplier.getSupplyList()));
+		supplierRepository.findAll().forEach(supplier -> supplies.addAll(((Supplier) supplier).getSupplyList()));
 		return supplies.stream().filter(supply -> supply.match(criteria)).collect(Collectors.toList());
 	}
 }

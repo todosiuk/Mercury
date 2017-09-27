@@ -24,7 +24,7 @@ public class LogisticServiceImplTest {
 
 	@Test
 	public void testNoDataReturnedAtStart() {
-		List<Supplier> suppliers = service.findSuppliers();
+		List<Supplier> suppliers = (List<Supplier>) service.findSuppliers();
 		assertTrue(suppliers.isEmpty());
 	}
 
@@ -34,7 +34,7 @@ public class LogisticServiceImplTest {
 		supplier.setName("Epic");
 		service.saveSupplier(supplier);
 
-		List<Supplier> suppliers = service.findSuppliers();
+		List<Supplier> suppliers = (List<Supplier>) service.findSuppliers();
 		assertEquals(suppliers.size(), 1);
 		assertEquals(suppliers.get(0).getName(), "Epic");
 	}

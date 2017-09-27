@@ -16,7 +16,7 @@ import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
  */
 public interface LogisticService {
 
-	List<Supplier> findSuppliers();
+	List<?> findSuppliers();
 
 	Optional<Supplier> findSupplierById(int id);
 

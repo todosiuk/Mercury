@@ -1,5 +1,7 @@
 package org.myapp.mercury.app.infrastructure.util;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +40,13 @@ public class CommonUtil {
 	 */
 	public static <T> List<T> getSafeList(List<T> source) {
 		return Collections.unmodifiableList(Optional.ofNullable(source).orElse(Collections.emptyList()));
+	}
+
+	public static <T> List<T> castList(Class<? extends T> clazz, Collection<?> c) {
+		List<T> r = new ArrayList<T>(c.size());
+		for (Object o : c)
+			r.add(clazz.cast(o));
+		return r;
 	}
 
 	/**

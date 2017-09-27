@@ -22,7 +22,7 @@ public class PersistenceContext {
 	public DriverManagerDataSource getDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/javasavvy");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/mercury");
 		dataSource.setUsername("root");
 		dataSource.setPassword("root");
 		return dataSource;
