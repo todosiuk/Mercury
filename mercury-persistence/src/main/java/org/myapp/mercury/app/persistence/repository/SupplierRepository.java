@@ -1,6 +1,7 @@
 package org.myapp.mercury.app.persistence.repository;
 
 import java.util.List;
+import java.util.Set;
 
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 
@@ -39,6 +40,6 @@ public interface SupplierRepository {
 	 * 
 	 * @return
 	 */
-	List<Supplier> findAll();
+	List<?> findAll();
 
 }

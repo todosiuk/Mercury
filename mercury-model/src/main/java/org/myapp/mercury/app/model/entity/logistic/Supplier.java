@@ -27,9 +27,6 @@ public class Supplier extends AbstractEntity {
 
 	private Set<Supply> supplyList;
 
-	public Supplier(String name) {
-	}
-
 	public Supplier() {
 	}
 

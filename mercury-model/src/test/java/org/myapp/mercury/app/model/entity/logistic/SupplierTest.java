@@ -19,7 +19,7 @@ public class SupplierTest {
 
 	@Before
 	public void setup() {
-		supplier = new Supplier("ANG");
+		supplier = new Supplier();
 
 	}
 
