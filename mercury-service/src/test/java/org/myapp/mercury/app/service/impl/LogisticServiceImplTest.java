@@ -1,6 +1,6 @@
-package org.myapp.mercury.app.service;
+package org.myapp.mercury.app.service.impl;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.rest.config.MercuryConfig;
 import org.myapp.mercury.app.rest.config.MercuryInitializer;
-import org.myapp.mercury.app.service.impl.LogisticServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -30,10 +29,10 @@ public class LogisticServiceImplTest {
 
 	@Autowired
 	private LogisticServiceImpl service;
-
+	
 	@Test
 	public void testNoDataReturnedAtStart() {
-		List<Supplier> cities = service.findSuppliers();
-		assertTrue(cities.isEmpty());
+		List<Supplier> suppliers = service.findSuppliers();
+		assertTrue(suppliers.isEmpty());
 	}
 }

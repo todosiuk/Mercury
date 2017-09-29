@@ -1,4 +1,4 @@
-package org.myapp.mercury.app.rest.controller;
+/**package org.myapp.mercury.app.rest.controller;
 
 import java.util.List;
 
@@ -20,4 +20,4 @@ public class SupplierController {
 	public List<String> findSuppliers() {
 		return null;
 	}
-}
+}*/

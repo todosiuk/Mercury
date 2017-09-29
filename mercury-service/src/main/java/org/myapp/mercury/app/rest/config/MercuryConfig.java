@@ -22,8 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@ComponentScans(value = { @ComponentScan("org.myapp.mercury.app.servise"),
-		@ComponentScan("org.myapp.mercury.app.persistence.repository") })
+@ComponentScans(value = { @ComponentScan("org.myapp.mercury.app") })
 public class MercuryConfig {
 
 	@Autowired

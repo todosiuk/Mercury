@@ -1,4 +1,4 @@
-package org.myapp.mercury.transform.impl;
+package org.myapp.mercury.app.transform.impl;
 
 import java.util.List;
 

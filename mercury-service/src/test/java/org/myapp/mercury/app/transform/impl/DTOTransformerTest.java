@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.myapp.mercury.app.infrastructure.exception.flow.InvalidParameterException;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.rest.dto.SupplierDTO;
-import org.myapp.mercury.transform.Transformer;
-import org.myapp.mercury.transform.impl.DTOTransformer;
+import org.myapp.mercury.app.transform.Transformer;
+import org.myapp.mercury.app.transform.impl.DTOTransformer;
 
 /**
  * Verifies functionality of the {@link DTOTransformer} unit
