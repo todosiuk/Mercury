@@ -1,11 +1,11 @@
-package org.myapp.mercury.transform.impl;
+package org.myapp.mercury.app.transform.impl;
 
 import org.myapp.mercury.app.infrastructure.util.Checks;
 import org.myapp.mercury.app.infrastructure.util.CommonUtil;
 import org.myapp.mercury.app.infrastructure.util.ReflectionUtil;
 import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 import org.myapp.mercury.app.rest.dto.base.BaseDTO;
-import org.myapp.mercury.transform.Transformer;
+import org.myapp.mercury.app.transform.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.myapp.mercury.transform;
+package org.myapp.mercury.app.transform;
 
 import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 import org.myapp.mercury.app.rest.dto.base.BaseDTO;

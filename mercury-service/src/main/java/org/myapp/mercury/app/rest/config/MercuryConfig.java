@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
+import org.myapp.mercury.app.model.entity.person.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -21,8 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@ComponentScans(value = { @ComponentScan("org.myapp.mercury.app.servise"),
-		@ComponentScan("org.myapp.mercury.app.persistence.repository") })
+@ComponentScans(value = { @ComponentScan("org.myapp.mercury.app") })
 public class MercuryConfig {
 
 	@Autowired
@@ -48,7 +48,7 @@ public class MercuryConfig {
 		props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		factoryBean.setHibernateProperties(props);
-		factoryBean.setAnnotatedClasses(Supplier.class, Supply.class);
+		factoryBean.setAnnotatedClasses(Supplier.class, Supply.class, Account.class);
 		return factoryBean;
 	}
 
