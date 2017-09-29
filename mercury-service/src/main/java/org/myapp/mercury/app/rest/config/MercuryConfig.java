@@ -7,6 +7,7 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
+import org.myapp.mercury.app.model.entity.person.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -48,7 +49,7 @@ public class MercuryConfig {
 		props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
 		props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		factoryBean.setHibernateProperties(props);
-		factoryBean.setAnnotatedClasses(Supplier.class, Supply.class);
+		factoryBean.setAnnotatedClasses(Supplier.class, Supply.class, Account.class);
 		return factoryBean;
 	}
 
