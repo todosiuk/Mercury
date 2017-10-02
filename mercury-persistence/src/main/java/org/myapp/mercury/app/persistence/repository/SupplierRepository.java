@@ -40,6 +40,8 @@ public interface SupplierRepository {
 	 * 
 	 * @return
 	 */
-	List<?> findAll();
+	List<Supplier> findAll();
+
+	void updateSupplier(Supplier supplier);
 
 }

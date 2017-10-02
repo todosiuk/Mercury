@@ -9,21 +9,24 @@ import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
+import org.myapp.mercury.app.persistence.repository.SupplierRepository;
 import org.myapp.mercury.app.persistence.repository.impl.SupplierRepositoryImpl;
 import org.myapp.mercury.app.service.LogisticService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class LogisticServiceImpl implements LogisticService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SupplierRepositoryImpl.class);
-	
-	@Autowired
-	private final SupplierRepositoryImpl supplierRepository;
 
-	public LogisticServiceImpl(SupplierRepositoryImpl supplierRepository) {
+	@Autowired
+	private final SupplierRepository supplierRepository;
+
+	public LogisticServiceImpl(SupplierRepository supplierRepository) {
 		this.supplierRepository = supplierRepository;
 	}
 

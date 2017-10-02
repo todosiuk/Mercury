@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
  *
  */
 @Repository
+@Transactional
 public class SupplierRepositoryImpl implements SupplierRepository {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SupplierRepositoryImpl.class);

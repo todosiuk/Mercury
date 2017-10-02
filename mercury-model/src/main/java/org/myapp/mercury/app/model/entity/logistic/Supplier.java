@@ -30,6 +30,10 @@ public class Supplier extends AbstractEntity {
 	public Supplier() {
 	}
 
+	public Supplier(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@Column(name = "NAME", nullable = false, length = 32)
 	public String getName() {
 		return name;
