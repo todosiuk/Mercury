@@ -10,6 +10,7 @@ import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
 import org.myapp.mercury.app.persistence.repository.SupplierRepository;
+import org.myapp.mercury.app.persistence.repository.SupplyRepository;
 import org.myapp.mercury.app.persistence.repository.impl.SupplierRepositoryImpl;
 import org.myapp.mercury.app.service.LogisticService;
 import org.slf4j.Logger;
@@ -25,9 +26,12 @@ public class LogisticServiceImpl implements LogisticService {
 
 	@Autowired
 	private final SupplierRepository supplierRepository;
+	@Autowired
+	private final SupplyRepository supplyRepository;
 
-	public LogisticServiceImpl(SupplierRepository supplierRepository) {
+	public LogisticServiceImpl(SupplierRepository supplierRepository, SupplyRepository supplyRepository) {
 		this.supplierRepository = supplierRepository;
+		this.supplyRepository = supplyRepository;
 	}
 
 	@Override
@@ -45,13 +49,6 @@ public class LogisticServiceImpl implements LogisticService {
 		return Optional.ofNullable(supplierRepository.findById(id));
 	}
 
-	@Override
-	public List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
-		Set<Supply> supplies = new HashSet<>();
-		supplierRepository.findAll().forEach(supplier -> supplies.addAll(((Supplier) supplier).getSupplyList()));
-		return supplies.stream().filter(supply -> supply.match(criteria)).collect(Collectors.toList());
-	}
-
 	public void deleteSupplier(int supplierId) {
 		supplierRepository.delete(supplierId);
 	}
@@ -59,5 +56,30 @@ public class LogisticServiceImpl implements LogisticService {
 	public void updateSupplier(Supplier supplier) {
 		supplierRepository.updateSupplier(supplier);
 
+	}
+
+	@Override
+	public void saveSupply(int supplierId, Supply supply) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void deleteSupply(int id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void updateSupply(Supply supply) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
+		Set<Supply> supplies = new HashSet<>();
+		supplierRepository.findAll().forEach(supplier -> supplies.addAll(((Supplier) supplier).getSupplyList()));
+		return supplies.stream().filter(supply -> supply.match(criteria)).collect(Collectors.toList());
 	}
 }

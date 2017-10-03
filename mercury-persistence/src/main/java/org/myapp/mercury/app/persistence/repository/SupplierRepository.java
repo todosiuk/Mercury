@@ -6,7 +6,7 @@ import java.util.Set;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 
 /**
- * Defines CRUD methods to access City objects in the persistent storage
+ * Defines methods to access Supplier objects in the persistent storage
  * 
  * @author todosuk
  *
@@ -15,7 +15,7 @@ public interface SupplierRepository {
 	/**
 	 * Saves(creates or modifies) specified supplier instance
 	 * 
-	 * @param city
+	 * @param supplier
 	 */
 	void save(Supplier supplier);
 
@@ -26,7 +26,7 @@ public interface SupplierRepository {
 	 * @param supplierId
 	 * @return
 	 */
-	Supplier findById(int SupplierId);
+	Supplier findById(int supplierId);
 
 	/**
 	 * Delete supplier with specified identifier
@@ -41,6 +41,12 @@ public interface SupplierRepository {
 	 * @return
 	 */
 	List<Supplier> findAll();
+
+	/**
+	 * Update supplier with specified identifier
+	 * 
+	 * @param supplier
+	 */
 
 	void updateSupplier(Supplier supplier);
 

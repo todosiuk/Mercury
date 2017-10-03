@@ -42,7 +42,7 @@ public class LogisticServiceImplTest {
 	}
 
 	@Test
-	public void saveNewSupplierSuccess() {
+	public void testSaveNewSupplierSuccess() {
 		Supplier supplier = new Supplier();
 		supplier.setName("ANP");
 		supplier.setFirstCreated(LocalDateTime.now());
@@ -54,7 +54,7 @@ public class LogisticServiceImplTest {
 	}
 
 	@Test
-	public void findSupplierByIdSuccess() {
+	public void testFindSupplierByIdSuccess() {
 		Supplier supplier = new Supplier();
 		supplier.setName("ANP");
 		supplier.setFirstCreated(LocalDateTime.now());
@@ -63,5 +63,51 @@ public class LogisticServiceImplTest {
 		Optional<Supplier> foundSuppliers = service.findSupplierById(supplier.getId());
 		assertTrue(foundSuppliers.isPresent());
 		assertEquals(foundSuppliers.get().getId(), supplier.getId());
+	}
+
+	@Test
+	public void testFindSupplierByIdNotFound() {
+		Optional<Supplier> suppliers = service.findSupplierById(156);
+		assertFalse(suppliers.isPresent());
+	}
+
+	@Test
+	public void testDeleteSupplier() {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+
+		service.deleteSupplier(supplier.getId());
+		List<Supplier> suppliers = service.findSuppliers();
+		assertEquals(suppliers.size(), 0);
+	}
+
+	@Test
+	public void testUpdateSupplier() {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+
+		supplier.setName("OPQ");
+		service.updateSupplier(supplier);
+
+		assertEquals(supplier.getName(), "OPQ");
+	}
+
+	@Test
+	public void testFindAllSuppliers() {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+		Supplier supplier1 = new Supplier();
+		supplier1.setFirstCreated(LocalDateTime.now());
+		supplier1.setName("OPQ");
+		service.saveSupplier(supplier1);
+
+		List<Supplier> suppliers = service.findSuppliers();
+		assertEquals(suppliers.size(), 2);
 	}
 }

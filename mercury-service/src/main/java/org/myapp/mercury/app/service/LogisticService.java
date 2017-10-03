@@ -9,7 +9,7 @@ import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
 
 /**
- * Entry point to perform operation over supplier entities
+ * Entry point to perform operation over supplier and supply entities
  * 
  * @author todosuk
  *
@@ -23,5 +23,15 @@ public interface LogisticService {
 	void saveSupplier(Supplier supplier);
 
 	List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria);
+
+	void deleteSupplier(int id);
+
+	void updateSupplier(Supplier supplier);
+
+	void saveSupply(int supplierId, Supply supply);
+
+	void deleteSupply(int id);
+
+	void updateSupply(Supply supply);
 
 }
