@@ -1,10 +1,7 @@
 package org.myapp.mercury.app.service.impl;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
@@ -78,8 +75,6 @@ public class LogisticServiceImpl implements LogisticService {
 
 	@Override
 	public List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
-		Set<Supply> supplies = new HashSet<>();
-		supplierRepository.findAll().forEach(supplier -> supplies.addAll(((Supplier) supplier).getSupplyList()));
-		return supplies.stream().filter(supply -> supply.match(criteria)).collect(Collectors.toList());
+		return supplyRepository.findAllByCriteria(criteria);
 	}
 }

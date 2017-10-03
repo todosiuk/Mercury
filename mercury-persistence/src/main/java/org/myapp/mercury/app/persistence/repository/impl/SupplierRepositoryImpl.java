@@ -3,6 +3,8 @@ package org.myapp.mercury.app.persistence.repository.impl;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.persistence.repository.SupplierRepository;
 import org.slf4j.Logger;
@@ -44,9 +46,9 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
 	@Override
 	public List<Supplier> findAll() {
-		@SuppressWarnings("unchecked")
-		List<Supplier> suppliers = manager.createQuery("select s from Supplier s ORDER BY s.name").getResultList();
-		return suppliers;
+		String query = "select s from Supplier s ORDER BY s.name";
+		TypedQuery<Supplier> suppliers = manager.createQuery(query, Supplier.class);
+		return suppliers.getResultList();
 	}
 
 	public void updateSupplier(Supplier supplier) {

@@ -43,7 +43,7 @@ public interface SupplyRepository {
 	 * 
 	 * @return
 	 */
-	List<Supplier> findAll();
+	List<Supply> findAll();
 
 	/**
 	 * Update supply with specified identifier

@@ -1,5 +1,7 @@
 package org.myapp.mercury.app.model.search.criteria;
 
+import java.time.LocalDateTime;
+
 /**
  * Filtering criteria for search operation
  * 
@@ -9,13 +11,13 @@ package org.myapp.mercury.app.model.search.criteria;
 public class SupplyCriteria {
 
 	private String carNumber;
-
 	private String driverName;
 	private String phone;
 	private String product;
 	private String documentReceiving;
 	private String department;
 	private String storekeeper;
+	private LocalDateTime firstCreated;
 	private String supplierName;
 
 	public String getCarNumber() {
@@ -80,6 +82,14 @@ public class SupplyCriteria {
 
 	public void setSupplierName(String supplierName) {
 		this.supplierName = supplierName;
+	}
+
+	public LocalDateTime getFirstCreated() {
+		return firstCreated;
+	}
+
+	public void setFirstCreated(LocalDateTime firstCreated) {
+		this.firstCreated = firstCreated;
 	}
 
 	
