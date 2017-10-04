@@ -2,7 +2,6 @@ package org.myapp.mercury.app.persistence.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -16,7 +15,11 @@ import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.persistence.repository.SupplyRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
+@Repository
+@Transactional
 public class SupplyRepositoryImpl implements SupplyRepository {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(SupplyRepositoryImpl.class);

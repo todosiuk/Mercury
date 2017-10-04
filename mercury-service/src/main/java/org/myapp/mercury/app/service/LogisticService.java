@@ -22,7 +22,7 @@ public interface LogisticService {
 
 	void saveSupplier(Supplier supplier);
 
-	List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria);
+	List<Supply> findSuppliesByCriteria(SupplyCriteria criteria, RangeCriteria rangeCriteria);
 
 	void deleteSupplier(int id);
 
@@ -33,5 +33,7 @@ public interface LogisticService {
 	void deleteSupply(int id);
 
 	void updateSupply(Supply supply);
+
+	List<Supply> findAllSupplies();
 
 }

@@ -52,29 +52,30 @@ public class LogisticServiceImpl implements LogisticService {
 
 	public void updateSupplier(Supplier supplier) {
 		supplierRepository.updateSupplier(supplier);
-
 	}
 
 	@Override
 	public void saveSupply(int supplierId, Supply supply) {
-		// TODO Auto-generated method stub
-
+		supplyRepository.save(supplierId, supply);
 	}
 
 	@Override
 	public void deleteSupply(int id) {
-		// TODO Auto-generated method stub
-
+		supplyRepository.delete(id);
 	}
 
 	@Override
 	public void updateSupply(Supply supply) {
-		// TODO Auto-generated method stub
-
+		supplyRepository.updateSupply(supply);
 	}
 
 	@Override
-	public List<Supply> searchSupplies(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
+	public List<Supply> findSuppliesByCriteria(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
 		return supplyRepository.findAllByCriteria(criteria);
+	}
+
+	@Override
+	public List<Supply> findAllSupplies() {
+		return supplyRepository.findAll();
 	}
 }

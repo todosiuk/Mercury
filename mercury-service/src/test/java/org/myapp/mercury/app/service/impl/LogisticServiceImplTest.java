@@ -9,6 +9,7 @@ import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
+import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.rest.config.MercuryConfig;
 import org.myapp.mercury.app.rest.config.MercuryInitializer;
 import org.myapp.mercury.app.service.LogisticService;
@@ -109,5 +110,40 @@ public class LogisticServiceImplTest {
 
 		List<Supplier> suppliers = service.findSuppliers();
 		assertEquals(suppliers.size(), 2);
+	}
+
+	@Test
+	public void testSaveNewSupplySuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findAllSupplies();
+		assertEquals(supplies.size(), 1);
+	}
+	
+
+	private Supplier createSupplier() {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		// supplier.setId(1);
+		supplier.setName("test");
+		return supplier;
+	}
+
+	private Supply createSupply() {
+		Supply supply = new Supply();
+		supply.setCarNumber("AA2630CO");
+		supply.setDepartment("130");
+		supply.setDocumentReceiving("ORD-25648");
+		supply.setDriverName(" Вася Пупкин");
+		supply.setFirstCreated(LocalDateTime.now());
+		// supply.setId(1);
+		supply.setPhone("097-569-8547-85");
+		supply.setProduct("Ламинат");
+		supply.setStorekeeper("Петя Пяточкин");
+		return supply;
 	}
 }
