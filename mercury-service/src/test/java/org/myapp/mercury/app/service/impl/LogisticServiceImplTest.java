@@ -123,7 +123,33 @@ public class LogisticServiceImplTest {
 		List<Supply> supplies = service.findAllSupplies();
 		assertEquals(supplies.size(), 1);
 	}
-	
+
+	@Test
+	public void testDeleteSupply() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		service.deleteSupply(supply.getId());
+		List<Supply> supplies = service.findAllSupplies();
+		assertEquals(supplies.size(), 0);
+	}
+
+	@Test
+	public void testUpdateSupply() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+		supply.setCarNumber("HG8958KI");
+		service.updateSupply(supply);
+
+		List<Supply> supplies = service.findAllSupplies();
+		assertEquals(supplies.get(0).getCarNumber(), "HG8958KI");
+	}
 
 	private Supplier createSupplier() {
 		Supplier supplier = new Supplier();
