@@ -1,6 +1,7 @@
 package org.myapp.mercury.app.model.search.criteria;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * Filtering criteria for search operation
@@ -17,8 +18,51 @@ public class SupplyCriteria {
 	private String documentReceiving;
 	private String department;
 	private String storekeeper;
-	private LocalDateTime firstCreated;
+	private LocalDateTime firstCreatedStartDate;
+	private LocalDateTime firstCreatedEndDate;
 	private String supplierName;
+
+	public SupplyCriteria(String str) {
+	}
+
+	public SupplyCriteria(String firstCreatedStartDate, String firstCreatedEndDate) {
+	}
+
+	public static SupplyCriteria byCarNumber(String carNumber) {
+		return new SupplyCriteria(carNumber);
+	}
+
+	public static SupplyCriteria byDriverName(String driverName) {
+		return new SupplyCriteria(driverName);
+	}
+
+	public static SupplyCriteria byPhone(String phone) {
+		return new SupplyCriteria(phone);
+	}
+
+	public static SupplyCriteria byProduct(String product) {
+		return new SupplyCriteria(product);
+	}
+
+	public static SupplyCriteria byDocumentReceiving(String documentReceiving) {
+		return new SupplyCriteria(documentReceiving);
+	}
+
+	public static SupplyCriteria byDepartment(String department) {
+		return new SupplyCriteria(department);
+	}
+
+	public static SupplyCriteria byStorekeeper(String storekeeper) {
+		return new SupplyCriteria(storekeeper);
+	}
+
+	public static SupplyCriteria bySupplierName(String supplierName) {
+		return new SupplyCriteria(supplierName);
+	}
+
+	public static SupplyCriteria betweenDate(String firstCreatedStartDate, String firstCreatedEndDate) {
+		return new SupplyCriteria(firstCreatedStartDate, firstCreatedEndDate);
+	}
 
 	public String getCarNumber() {
 		return carNumber;
@@ -84,14 +128,19 @@ public class SupplyCriteria {
 		this.supplierName = supplierName;
 	}
 
-	public LocalDateTime getFirstCreated() {
-		return firstCreated;
+	public LocalDateTime getFirstCreatedStartDate() {
+		return firstCreatedStartDate;
 	}
 
-	public void setFirstCreated(LocalDateTime firstCreated) {
-		this.firstCreated = firstCreated;
+	public void setFirstCreatedStartDate(LocalDateTime firstCreatedStartDate) {
+		this.firstCreatedStartDate = firstCreatedStartDate;
 	}
 
-	
+	public LocalDateTime getFirstCreatedEndDate() {
+		return firstCreatedEndDate;
+	}
 
+	public void setFirstCreatedEndDate(LocalDateTime firstCreatedEndDate) {
+		this.firstCreatedEndDate = firstCreatedEndDate;
+	}
 }

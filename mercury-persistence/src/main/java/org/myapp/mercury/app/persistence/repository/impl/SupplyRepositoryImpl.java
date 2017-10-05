@@ -83,9 +83,9 @@ public class SupplyRepositoryImpl implements SupplyRepository {
 		if (supplyCriteria.getSupplierName() != null && !supplyCriteria.getSupplierName().isEmpty()) {
 			predicates.add(cb.like(supplyRoot.get("supplier"), supplyCriteria.getSupplierName()));
 		}
-		if (supplyCriteria.getFirstCreated() != null) {
-			predicates.add(cb.between(supplyRoot.get("firstCreated"), supplyCriteria.getFirstCreated(),
-					supplyCriteria.getFirstCreated()));
+		if (supplyCriteria.getFirstCreatedStartDate() != null && supplyCriteria.getFirstCreatedEndDate() != null) {
+			predicates.add(cb.between(supplyRoot.get("firstCreated"), supplyCriteria.getFirstCreatedStartDate(),
+					supplyCriteria.getFirstCreatedEndDate()));
 		}
 		if (!predicates.isEmpty()) {
 			query.where(cb.and(predicates.toArray(new Predicate[predicates.size()])));

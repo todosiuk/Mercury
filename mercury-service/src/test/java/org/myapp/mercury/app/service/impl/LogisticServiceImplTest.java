@@ -10,6 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
+import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
+import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
 import org.myapp.mercury.app.rest.config.MercuryConfig;
 import org.myapp.mercury.app.rest.config.MercuryInitializer;
 import org.myapp.mercury.app.service.LogisticService;
@@ -149,6 +151,28 @@ public class LogisticServiceImplTest {
 
 		List<Supply> supplies = service.findAllSupplies();
 		assertEquals(supplies.get(0).getCarNumber(), "HG8958KI");
+	}
+
+	@Test
+	public void testFindSupplyByCarNumbetrSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byCarNumber("AA2630CO"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+	}
+
+	@Test
+	public void testFindSupplyByCarNumberNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byCarNumber("CO5864IJ"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
 	}
 
 	private Supplier createSupplier() {
