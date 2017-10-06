@@ -25,7 +25,7 @@ public class SupplyCriteria {
 	public SupplyCriteria(String str) {
 	}
 
-	public SupplyCriteria(String firstCreatedStartDate, String firstCreatedEndDate) {
+	public SupplyCriteria(LocalDateTime firstCreatedStartDate, LocalDateTime firstCreatedEndDate) {
 	}
 
 	public static SupplyCriteria byCarNumber(String carNumber) {
@@ -60,7 +60,7 @@ public class SupplyCriteria {
 		return new SupplyCriteria(supplierName);
 	}
 
-	public static SupplyCriteria betweenDate(String firstCreatedStartDate, String firstCreatedEndDate) {
+	public static SupplyCriteria betweenDate(LocalDateTime firstCreatedStartDate, LocalDateTime firstCreatedEndDate) {
 		return new SupplyCriteria(firstCreatedStartDate, firstCreatedEndDate);
 	}
 

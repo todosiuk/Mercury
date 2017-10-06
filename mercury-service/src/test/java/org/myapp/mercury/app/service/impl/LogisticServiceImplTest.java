@@ -175,6 +175,210 @@ public class LogisticServiceImplTest {
 		assertTrue(supplies.isEmpty());
 	}
 
+	@Test
+	public void testFindSupplyByDriverNameSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byDriverName("Вася Пупкин"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getDriverName(), "Вася Пупкин");
+	}
+
+	@Test
+	public void testFindSupplyByDriverNameNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byDriverName("Вася Перышкин"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplyByPhoneSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byPhone("097-569-8547-85"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getPhone(), "097-569-8547-85");
+	}
+
+	@Test
+	public void testFindSupplyByPhoneNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byPhone("+358-854-85-74"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplyByProductSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byProduct("Ламинат"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getProduct(), "Ламинат");
+	}
+
+	@Test
+	public void testFindSupplyByProductNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byProduct("плитка"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplyByDocumentReceivingSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byDocumentReceiving("ORD-25648"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getDocumentReceiving(), "ORD-25648");
+	}
+
+	@Test
+	public void testFindSupplyByDocumentReceivingNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byDocumentReceiving("РНК-4587"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplyByDepartmentSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byDepartment("130"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getDepartment(), "130");
+	}
+
+	@Test
+	public void testFindSupplyByDepartmentNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byDepartment("60"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplyByStorekeeperSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byStorekeeper("Петя Пяточкин"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getStorekeeper(), "Петя Пяточкин");
+	}
+
+	@Test
+	public void testFindSupplyByStorekeeperNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.byStorekeeper("Вася Перышкин"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplyBySupplierNameSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = createSupply();
+		supply.setSupplier(supplier);
+		service.saveSupply(supplier.getId(), supply);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.bySupplierName("test"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 1);
+		assertEquals(supplies.get(0).getSupplier().getName(), "test");
+	}
+
+	@Test
+	public void testFindSupplyBySupplierNameNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria.bySupplierName("nameNotFound"),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindBetweenDateSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Supply supply = new Supply();
+		supply.setSupplier(supplier);
+		supply.setCarNumber("AA2630CO");
+		supply.setDepartment("130");
+		supply.setDocumentReceiving("ORD-25648");
+		supply.setDriverName("Вася Пупкин");
+		supply.setFirstCreated(LocalDateTime.of(2017, 10, 05, 15, 01));
+		supply.setPhone("097-569-8547-85");
+		supply.setProduct("Ламинат");
+		supply.setStorekeeper("Петя Пяточкин");
+		service.saveSupply(supplier.getId(), supply);
+		Supply supply1 = new Supply();
+		supply1.setSupplier(supplier);
+		supply1.setCarNumber("AA2635CO");
+		supply1.setDepartment("135");
+		supply1.setDocumentReceiving("ORD-24548");
+		supply1.setDriverName("Вася");
+		supply1.setFirstCreated(LocalDateTime.of(2017, 10, 06, 15, 54));
+		supply1.setPhone("097-569-8-85");
+		supply1.setProduct("плитка");
+		supply1.setStorekeeper("Петя");
+		service.saveSupply(supplier.getId(), supply1);
+
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria
+				.betweenDate(LocalDateTime.of(2017, 10, 05, 15, 00), LocalDateTime.of(2017, 10, 06, 15, 55)),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertEquals(supplies.size(), 2);
+	}
+
+	@Test
+	public void testFindSupplyBetweenDateNotFound() {
+		List<Supply> supplies = service.findSuppliesByCriteria(SupplyCriteria
+				.betweenDate(LocalDateTime.of(2017, 10, 03, 15, 00), LocalDateTime.of(2017, 10, 04, 15, 26)),
+				new RangeCriteria(1, 5));
+		assertNotNull(supplies);
+		assertTrue(supplies.isEmpty());
+	}
+
 	private Supplier createSupplier() {
 		Supplier supplier = new Supplier();
 		supplier.setFirstCreated(LocalDateTime.now());
@@ -188,7 +392,7 @@ public class LogisticServiceImplTest {
 		supply.setCarNumber("AA2630CO");
 		supply.setDepartment("130");
 		supply.setDocumentReceiving("ORD-25648");
-		supply.setDriverName(" Вася Пупкин");
+		supply.setDriverName("Вася Пупкин");
 		supply.setFirstCreated(LocalDateTime.now());
 		// supply.setId(1);
 		supply.setPhone("097-569-8547-85");
