@@ -3,9 +3,15 @@ package org.myapp.mercury.app.service.impl;
 import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
@@ -37,6 +43,18 @@ public class LogisticServiceImplTest {
 
 	@Autowired
 	private LogisticService service;
+
+	private static ExecutorService executorService;
+
+	@BeforeClass
+	public static void setup() {
+		executorService = Executors.newCachedThreadPool();
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		executorService.shutdownNow();
+	}
 
 	@Test
 	public void testNoDataReturnedAtStart() {
@@ -378,6 +396,81 @@ public class LogisticServiceImplTest {
 		assertNotNull(supplies);
 		assertTrue(supplies.isEmpty());
 	}
+
+	@Test
+	public void testSaveMultipleSuppliersSuccess() {
+		int supplierCount = service.findSuppliers().size();
+
+		int addedCount = 100_000;
+		for (int i = 0; i < addedCount; i++) {
+			Supplier supplier = new Supplier();
+			supplier.setFirstCreated(LocalDateTime.now());
+			supplier.setName("ANP" + i);
+			service.saveSupplier(supplier);
+		}
+
+		List<Supplier> suppliers = service.findSuppliers();
+		assertEquals(suppliers.size(), supplierCount + addedCount);
+	}
+
+	/**@Test
+	public void testSaveMultipleSuppliersConcurentlySuccess() {
+		int supplierCount = service.findSuppliers().size();
+
+		int threadCount = 200;
+		int batchCount = 10;
+
+		List<Future<?>> futures = new ArrayList<>();
+
+		for (int i = 0; i < threadCount; i++) {
+			futures.add(executorService.submit(() -> {
+				for (int j = 0; j < batchCount; j++) {
+					Supplier supplier = new Supplier();
+					supplier.setFirstCreated(LocalDateTime.now());
+					supplier.setName("ANP_" + Math.random());
+					service.saveSupplier(supplier);
+				}
+			}));
+		}
+
+		waitForFutures(futures);
+		List<Supplier> suppliers = service.findSuppliers();
+		assertEquals(suppliers.size(), supplierCount + threadCount * batchCount);
+
+	}
+
+	@Test
+	public void testSaveOneSupplierConcurentlySuccess() {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+
+		int supplierCount = service.findSuppliers().size();
+		int threadCount = 200;
+
+		List<Future<?>> futures = new ArrayList<>();
+
+		for (int i = 0; i < threadCount; i++) {
+			futures.add(executorService.submit(() -> {
+				supplier.setName("ANP" + Math.random());
+				service.saveSupplier(supplier);
+			}));
+		}
+
+		List<Supplier> suppliers = service.findSuppliers();
+		assertEquals(suppliers.size(), supplierCount);
+	}
+
+	private void waitForFutures(List<Future<?>> futures) {
+		futures.forEach(future -> {
+			try {
+				future.get();
+			} catch (Exception e) {
+				fail(e.getMessage());
+			}
+		});
+	}*/
 
 	private Supplier createSupplier() {
 		Supplier supplier = new Supplier();
