@@ -3,9 +3,15 @@ package org.myapp.mercury.app.service.impl;
 import static org.junit.Assert.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
@@ -37,6 +43,18 @@ public class LogisticServiceImplTest {
 
 	@Autowired
 	private LogisticService service;
+
+	private static ExecutorService executorService;
+
+	@BeforeClass
+	public static void setup() {
+		executorService = Executors.newCachedThreadPool();
+	}
+
+	@AfterClass
+	public static void tearDown() {
+		executorService.shutdownNow();
+	}
 
 	@Test
 	public void testNoDataReturnedAtStart() {
