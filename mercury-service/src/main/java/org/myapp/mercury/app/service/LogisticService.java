@@ -20,7 +20,7 @@ public interface LogisticService {
 
 	Optional<Supplier> findSupplierById(int id);
 
-	Optional<Supplier> findSupplierByName(String name);
+	Optional<List<Supplier>> findSupplierByName(String name);
 
 	void saveSupplier(Supplier supplier);
 

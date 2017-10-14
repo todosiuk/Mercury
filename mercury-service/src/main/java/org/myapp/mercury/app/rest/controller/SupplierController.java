@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -41,7 +42,7 @@ public class SupplierController {
 
 	@PostMapping("/saveSupplier")
 	public ResponseEntity<Void> saveSupplier(SupplierDTO supplierDTO) {
-		Optional<Supplier> supplier = logisticService.findSupplierByName(supplierDTO.getName());
+		Optional<List<Supplier>> supplier = logisticService.findSupplierByName(supplierDTO.getName());
 		if (supplier.isPresent()) {
 			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
 		}

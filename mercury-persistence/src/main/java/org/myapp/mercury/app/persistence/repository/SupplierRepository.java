@@ -55,5 +55,5 @@ public interface SupplierRepository {
 	 * @param name
 	 * @return
 	 */
-	Supplier findSupplierByName(String name);
+	List<Supplier> findSupplierByName(String name);
 }

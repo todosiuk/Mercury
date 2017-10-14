@@ -54,10 +54,10 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 		manager.merge(supplier);
 	}
 
-	public Supplier findSupplierByName(String name) {
-		String query = "select s from Supplier s where s.name=:name";
+	public List<Supplier> findSupplierByName(String name) {
+		String query = "from Supplier where name=:name";
 		TypedQuery<Supplier> supplier = manager.createQuery(query, Supplier.class);
 		supplier.setParameter("name", name);
-		return supplier.getSingleResult();
+		return supplier.getResultList();
 	}
 }
