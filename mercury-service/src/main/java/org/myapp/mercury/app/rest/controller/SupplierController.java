@@ -40,8 +40,13 @@ public class SupplierController {
 	}
 
 	@PostMapping("/saveSupplier")
-	public void saveSupplier(SupplierDTO supplierDTO) {
+	public ResponseEntity<Void> saveSupplier(SupplierDTO supplierDTO) {
+		Optional<Supplier> supplier = logisticService.findSupplierByName(supplierDTO.getName());
+		if (supplier.isPresent()) {
+			return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+		}
 		logisticService.saveSupplier(transformer.untransform(supplierDTO, Supplier.class));
+		return new ResponseEntity<Void>(HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/deleteSupplier/{id}")

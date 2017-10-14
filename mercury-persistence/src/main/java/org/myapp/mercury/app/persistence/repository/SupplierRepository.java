@@ -1,8 +1,6 @@
 package org.myapp.mercury.app.persistence.repository;
 
 import java.util.List;
-import java.util.Set;
-
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 
 /**
@@ -50,4 +48,12 @@ public interface SupplierRepository {
 
 	void updateSupplier(Supplier supplier);
 
+	/**
+	 * Return supplier with specified name. If no supplier exists with such name
+	 * then null is returned
+	 * 
+	 * @param name
+	 * @return
+	 */
+	Supplier findSupplierByName(String name);
 }

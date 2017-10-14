@@ -4,7 +4,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.persistence.repository.SupplierRepository;
 import org.slf4j.Logger;
@@ -53,5 +52,12 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
 	public void updateSupplier(Supplier supplier) {
 		manager.merge(supplier);
+	}
+
+	public Supplier findSupplierByName(String name) {
+		String query = "select s from Supplier s where s.name=:name";
+		TypedQuery<Supplier> supplier = manager.createQuery(query, Supplier.class);
+		supplier.setParameter("name", name);
+		return supplier.getSingleResult();
 	}
 }

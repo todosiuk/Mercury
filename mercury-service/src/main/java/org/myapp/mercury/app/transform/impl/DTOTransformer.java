@@ -8,6 +8,7 @@ import org.myapp.mercury.app.rest.dto.base.BaseDTO;
 import org.myapp.mercury.app.transform.Transformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * Default transformation engine that uses reflection to transform objects
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
  * @author todosuk
  *
  */
+@Service
 public class DTOTransformer implements Transformer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DTOTransformer.class);
 

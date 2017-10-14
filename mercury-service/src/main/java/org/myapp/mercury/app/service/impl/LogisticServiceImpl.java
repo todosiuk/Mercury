@@ -46,6 +46,10 @@ public class LogisticServiceImpl implements LogisticService {
 		return Optional.ofNullable(supplierRepository.findById(id));
 	}
 
+	public Optional<Supplier> findSupplierByName(String name) {
+		return Optional.ofNullable(supplierRepository.findSupplierByName(name));
+	}
+
 	public void deleteSupplier(int supplierId) {
 		supplierRepository.delete(supplierId);
 	}

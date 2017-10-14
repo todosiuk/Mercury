@@ -397,6 +397,15 @@ public class LogisticServiceImplTest {
 		assertTrue(supplies.isEmpty());
 	}
 
+	@Test
+	public void testFindSupplierByNameSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		Optional<Supplier> findedSupplier = service.findSupplierByName("test");
+		assertNotNull(findedSupplier);
+		assertEquals("test", findedSupplier.get().getName());
+	}
+
 	private Supplier createSupplier() {
 		Supplier supplier = new Supplier();
 		supplier.setFirstCreated(LocalDateTime.now());
