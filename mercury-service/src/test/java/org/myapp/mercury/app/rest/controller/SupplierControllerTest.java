@@ -2,26 +2,23 @@ package org.myapp.mercury.app.rest.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 import java.util.List;
-import static org.mockito.BDDMockito.given;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.rest.config.MercuryConfig;
 import org.myapp.mercury.app.rest.config.MercuryInitializer;
-import org.myapp.mercury.app.rest.dto.SupplierDTO;
 import org.myapp.mercury.app.service.LogisticService;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -34,8 +31,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 @ContextConfiguration(classes = { MercuryConfig.class,
 		MercuryInitializer.class }, loader = AnnotationConfigContextLoader.class)
 public class SupplierControllerTest {
-
-	List<Supplier> suppliers;
 
 	private MockMvc mockMvc;
 
@@ -51,16 +46,24 @@ public class SupplierControllerTest {
 		mockMvc = MockMvcBuilders.standaloneSetup(supplierController).build();
 	}
 
-	/**
-	 * If database is empty return status NotFound If database is not empty must
-	 * return status is OK
-	 * 
-	 * @throws Exception
-	 */
 	@Test
-	public void testGetAllSupplier() throws Exception {
+	public void testGetAllSuppliers() throws Exception {
 		List<Supplier> suppliers = logisticService.findSuppliers();
 		when(logisticService.findSuppliers()).thenReturn(suppliers);
-		mockMvc.perform(get("/suppliers").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+		mockMvc.perform(get("/suppliers").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
+
+	@Test
+	public void testSaveSupplier() throws Exception {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setId(1);
+		supplier.setName("test");
+		logisticService.saveSupplier(supplier);
+
+		Mockito.verify(logisticService).saveSupplier(supplier);
+
+		mockMvc.perform(post("/saveSupplier")).andExpect(status().isCreated());
+	}
+
 }

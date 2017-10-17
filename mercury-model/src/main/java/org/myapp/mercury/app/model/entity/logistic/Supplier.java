@@ -1,5 +1,6 @@
 package org.myapp.mercury.app.model.entity.logistic;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -31,6 +32,10 @@ public class Supplier extends AbstractEntity {
 	}
 
 	public Supplier(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Supplier(String string, int i, LocalDateTime now) {
 		// TODO Auto-generated constructor stub
 	}
 
