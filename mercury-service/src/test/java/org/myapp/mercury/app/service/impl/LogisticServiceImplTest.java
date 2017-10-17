@@ -57,17 +57,33 @@ public class LogisticServiceImplTest {
 	}
 
 	@Test
+	public void testNoDataReturnedAtStart() {
+		List<Supplier> suppliers = service.findSuppliers();
+		assertTrue(suppliers.isEmpty());
+	}
+
+	@Test
 	public void testSaveNewSupplierSuccess() {
+		Supplier supplier = new Supplier();
+		supplier.setName("ANP");
+		supplier.setFirstCreated(LocalDateTime.now());
+		service.saveSupplier(supplier);
+
 		List<Supplier> suppliers = service.findSuppliers();
 		assertEquals(suppliers.size(), 1);
-		assertEquals(suppliers.get(0).getName(), "test");
+		assertEquals(suppliers.get(0).getName(), "ANP");
 	}
 
 	@Test
 	public void testFindSupplierByIdSuccess() {
-		Optional<Supplier> foundSuppliers = service.findSupplierById(1);
+		Supplier supplier = new Supplier();
+		supplier.setName("ANP");
+		supplier.setFirstCreated(LocalDateTime.now());
+		service.saveSupplier(supplier);
+
+		Optional<Supplier> foundSuppliers = service.findSupplierById(supplier.getId());
 		assertTrue(foundSuppliers.isPresent());
-		assertEquals(foundSuppliers.get().getId(), 1);
+		assertEquals(foundSuppliers.get().getId(), supplier.getId());
 	}
 
 	@Test
@@ -78,14 +94,23 @@ public class LogisticServiceImplTest {
 
 	@Test
 	public void testDeleteSupplier() {
-		service.deleteSupplier(1);
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+
+		service.deleteSupplier(supplier.getId());
 		List<Supplier> suppliers = service.findSuppliers();
 		assertEquals(suppliers.size(), 0);
 	}
 
 	@Test
 	public void testUpdateSupplier() {
-		Supplier supplier =createSupplier();
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+
 		supplier.setName("OPQ");
 		service.updateSupplier(supplier);
 
@@ -365,6 +390,8 @@ public class LogisticServiceImplTest {
 
 	@Test
 	public void testFindSupplierByNameSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
 		Optional<List<Supplier>> findedSupplier = service.findSupplierByName("test");
 
 		assertNotNull(findedSupplier);
