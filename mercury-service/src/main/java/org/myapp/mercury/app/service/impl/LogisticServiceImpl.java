@@ -42,7 +42,7 @@ public class LogisticServiceImpl implements LogisticService {
 	}
 
 	@Override
-	public Optional<Supplier> findSupplierById(final int id) {
+	public Optional<Supplier> findSupplierById(final long id) {
 		return Optional.ofNullable(supplierRepository.findById(id));
 	}
 
@@ -50,7 +50,7 @@ public class LogisticServiceImpl implements LogisticService {
 		return Optional.ofNullable(supplierRepository.findSupplierByName(name));
 	}
 
-	public void deleteSupplier(int supplierId) {
+	public void deleteSupplier(long supplierId) {
 		supplierRepository.delete(supplierId);
 	}
 
@@ -59,12 +59,12 @@ public class LogisticServiceImpl implements LogisticService {
 	}
 
 	@Override
-	public void saveSupply(int supplierId, Supply supply) {
+	public void saveSupply(long supplierId, Supply supply) {
 		supplyRepository.save(supplierId, supply);
 	}
 
 	@Override
-	public void deleteSupply(int id) {
+	public void deleteSupply(long id) {
 		supplyRepository.delete(id);
 	}
 

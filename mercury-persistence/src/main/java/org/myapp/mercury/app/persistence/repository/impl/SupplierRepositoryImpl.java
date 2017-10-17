@@ -31,14 +31,14 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	}
 
 	@Override
-	public Supplier findById(int supplierId) {
+	public Supplier findById(long supplierId) {
 		Supplier supplier = manager.find(Supplier.class, supplierId);
 		return supplier;
 
 	}
 
 	@Override
-	public void delete(int supplierId) {
+	public void delete(long supplierId) {
 		Supplier supplier = manager.find(Supplier.class, supplierId);
 		manager.remove(supplier);
 	}

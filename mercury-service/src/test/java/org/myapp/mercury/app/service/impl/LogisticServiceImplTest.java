@@ -119,8 +119,17 @@ public class LogisticServiceImplTest {
 
 	@Test
 	public void testFindAllSuppliers() {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("ANP");
+		service.saveSupplier(supplier);
+		Supplier supplier1 = new Supplier();
+		supplier1.setFirstCreated(LocalDateTime.now());
+		supplier1.setName("OPQ");
+		service.saveSupplier(supplier1);
+
 		List<Supplier> suppliers = service.findSuppliers();
-		assertEquals(suppliers.size(), 1);
+		assertEquals(suppliers.size(), 2);
 	}
 
 	@Test

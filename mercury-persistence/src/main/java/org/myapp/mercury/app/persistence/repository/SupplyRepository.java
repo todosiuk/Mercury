@@ -20,7 +20,7 @@ public interface SupplyRepository {
 	 * @param supplierId
 	 * @param supply
 	 */
-	void save(int supplierId, Supply supply);
+	void save(long supplierId, Supply supply);
 
 	/**
 	 * Returns supply with specified identifier. If no supplies exists with such
@@ -29,14 +29,14 @@ public interface SupplyRepository {
 	 * @param supplyId
 	 * @return
 	 */
-	Supply findById(int supplyId);
+	Supply findById(long supplyId);
 
 	/**
 	 * Delete supply with specified identifier
 	 * 
-	 * @param supplyId
+	 * @param id
 	 */
-	void delete(int supplyId);
+	void delete(long id);
 
 	/**
 	 * Returns all the supplies

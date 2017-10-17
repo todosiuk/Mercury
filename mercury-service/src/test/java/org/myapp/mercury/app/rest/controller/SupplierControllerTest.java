@@ -6,7 +6,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import static java.util.Arrays.asList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,22 +50,24 @@ public class SupplierControllerTest {
 	}
 
 	@Test
-	public void testGetAllSuppliers() throws Exception {
-		List<Supplier> suppliers = logisticService.findSuppliers();
+	public void testGetAllSuppliersNotFound() throws Exception {
+		when(logisticService.findSuppliers()).thenReturn(Collections.emptyList());
+		mockMvc.perform(get("/suppliers").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void testGetAllSuppliersSuccess() throws Exception {
+		List<Supplier> suppliers = asList(new Supplier());
 		when(logisticService.findSuppliers()).thenReturn(suppliers);
+
 		mockMvc.perform(get("/suppliers").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	@Test
 	public void testSaveSupplier() throws Exception {
 		Supplier supplier = new Supplier();
-		supplier.setFirstCreated(LocalDateTime.now());
-		supplier.setId(1);
-		supplier.setName("test");
-		logisticService.saveSupplier(supplier);
-
-		Mockito.verify(logisticService).saveSupplier(supplier);
-
+		
+		when(logisticService.saveSupplier(supplier)).thenReturn(new Supplier());
 		mockMvc.perform(post("/saveSupplier")).andExpect(status().isCreated());
 	}
 

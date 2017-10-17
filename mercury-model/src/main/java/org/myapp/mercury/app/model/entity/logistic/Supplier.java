@@ -35,7 +35,7 @@ public class Supplier extends AbstractEntity {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Supplier(String string, int i, LocalDateTime now) {
+	public Supplier(String string, long i, LocalDateTime now) {
 		// TODO Auto-generated constructor stub
 	}
 

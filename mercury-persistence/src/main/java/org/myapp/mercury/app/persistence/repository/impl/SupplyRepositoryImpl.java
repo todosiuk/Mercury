@@ -28,20 +28,20 @@ public class SupplyRepositoryImpl implements SupplyRepository {
 	private EntityManager manager;
 
 	@Override
-	public void save(int supplierId, Supply supply) {
+	public void save(long supplierId, Supply supply) {
 		Supplier supplier = manager.find(Supplier.class, supplierId);
 		supply.setSupplier(supplier);
 		manager.persist(supply);
 	}
 
 	@Override
-	public Supply findById(int supplyId) {
+	public Supply findById(long supplyId) {
 		Supply supply = manager.find(Supply.class, supplyId);
 		return supply;
 	}
 
 	@Override
-	public void delete(int supplyId) {
+	public void delete(long supplyId) {
 		Supply supply = manager.find(Supply.class, supplyId);
 		manager.remove(supply);
 	}

@@ -21,17 +21,17 @@ public interface SupplierRepository {
 	 * Returns supplier with specified identifier. If no supplier exists with such
 	 * identifier then null is returned
 	 * 
-	 * @param supplierId
+	 * @param id
 	 * @return
 	 */
-	Supplier findById(int supplierId);
+	Supplier findById(long id);
 
 	/**
 	 * Delete supplier with specified identifier
 	 * 
 	 * @param supplierId
 	 */
-	void delete(int supplierId);
+	void delete(long supplierId);
 
 	/**
 	 * Returns all the suppliers
