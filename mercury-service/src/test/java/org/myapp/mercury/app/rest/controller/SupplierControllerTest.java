@@ -64,11 +64,13 @@ public class SupplierControllerTest {
 	}
 
 	@Test
-	public void testSaveSupplier() throws Exception {
-		Supplier supplier = new Supplier();
-		
-		when(logisticService.saveSupplier(supplier)).thenReturn(new Supplier());
-		mockMvc.perform(post("/saveSupplier")).andExpect(status().isCreated());
+	public void testSaveSupplierNameAlreadyExist() throws Exception {
+		List<Supplier> suppliers = asList(new Supplier());
+		when(logisticService.findSupplierByName("test")).thenReturn(suppliers);
+
+		mockMvc.perform(post("/saveSupplier").accept(MediaType.APPLICATION_JSON)).andExpect(status().isConflict());
 	}
+	
+	
 
 }

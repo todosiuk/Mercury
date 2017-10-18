@@ -42,7 +42,7 @@ public class SupplierController {
 	// -------------------Create a Supplier-----------------------------
 
 	@PostMapping("/saveSupplier")
-	public ResponseEntity<?> saveSupplier(@RequestBody Supplier supplier) {
+	public ResponseEntity<?> saveSupplier(Supplier supplier) {
 
 		logger.info("Creating Supplier : {}", supplier);
 		if (logisticService.findSupplierByName(supplier.getName()) != null) {

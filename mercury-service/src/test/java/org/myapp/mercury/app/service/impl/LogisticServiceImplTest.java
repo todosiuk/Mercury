@@ -401,17 +401,16 @@ public class LogisticServiceImplTest {
 	public void testFindSupplierByNameSuccess() {
 		Supplier supplier = createSupplier();
 		service.saveSupplier(supplier);
-		Optional<List<Supplier>> findedSupplier = service.findSupplierByName("test");
+		List<Supplier> findedSupplier = service.findSupplierByName("test");
 
 		assertNotNull(findedSupplier);
-		assertTrue(findedSupplier.isPresent());
 	}
 
 	@Test
 	public void testFindSupplierByNameNotFound() {
-		Optional<List<Supplier>> findedSupplier = service.findSupplierByName("test1");
+		List<Supplier> findedSupplier = service.findSupplierByName("test1");
 
-		assertTrue(findedSupplier.get().isEmpty());
+		assertEquals(findedSupplier.size(),0);
 	}
 
 	private Supplier createSupplier() {
