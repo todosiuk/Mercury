@@ -1,6 +1,7 @@
 package org.myapp.mercury.app.rest.controller;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -59,7 +60,6 @@ public class SupplierControllerTest {
 	public void testGetAllSuppliersSuccess() throws Exception {
 		List<Supplier> suppliers = asList(new Supplier());
 		when(logisticService.findSuppliers()).thenReturn(suppliers);
-
 		mockMvc.perform(get("/suppliers").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
@@ -67,23 +67,28 @@ public class SupplierControllerTest {
 	public void testSaveSupplierNameAlreadyExist() throws Exception {
 		List<Supplier> suppliers = asList(new Supplier());
 		when(logisticService.findSupplierByName("test")).thenReturn(suppliers);
-
 		mockMvc.perform(post("/saveSupplier").accept(MediaType.APPLICATION_JSON)).andExpect(status().isConflict());
 	}
 
 	@Test
 	public void testSaveSupplierNameNotFound() throws Exception {
-		Supplier supplier = new Supplier();
-		supplier.setFirstCreated(LocalDateTime.now());
-		supplier.setName("supplier");
-		supplier.setId(1);
-		
 		when(logisticService.findSupplierByName(null)).thenReturn(null);
-		logisticService.saveSupplier(supplier);
-		Mockito.verify(logisticService).saveSupplier(supplier);
-
 		mockMvc.perform(post("/saveSupplier").accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+	}
 
+	@Test
+	public void testDeleteSupplierSuccess() throws Exception {
+		Optional<Supplier> supplier = Optional.of(new Supplier());
+		when(logisticService.findSupplierById(1)).thenReturn(supplier);
+		mockMvc.perform(delete("/deleteSupplier/1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNoContent());
+	}
+
+	@Test
+	public void testDeleteSupplierIdNotFound() throws Exception {
+		when(logisticService.findSupplierById(1)).thenReturn(null);
+		mockMvc.perform(delete("/deleteSupplier/1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
 	}
 
 }
