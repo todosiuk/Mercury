@@ -70,7 +70,20 @@ public class SupplierControllerTest {
 
 		mockMvc.perform(post("/saveSupplier").accept(MediaType.APPLICATION_JSON)).andExpect(status().isConflict());
 	}
-	
-	
+
+	@Test
+	public void testSaveSupplierNameNotFound() throws Exception {
+		Supplier supplier = new Supplier();
+		supplier.setFirstCreated(LocalDateTime.now());
+		supplier.setName("supplier");
+		supplier.setId(1);
+		
+		when(logisticService.findSupplierByName(null)).thenReturn(null);
+		logisticService.saveSupplier(supplier);
+		Mockito.verify(logisticService).saveSupplier(supplier);
+
+		mockMvc.perform(post("/saveSupplier").accept(MediaType.APPLICATION_JSON)).andExpect(status().isCreated());
+
+	}
 
 }
