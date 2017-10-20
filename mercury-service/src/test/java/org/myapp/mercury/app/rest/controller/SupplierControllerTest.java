@@ -78,7 +78,7 @@ public class SupplierControllerTest {
 
 	@Test
 	public void testDeleteSupplierSuccess() throws Exception {
-		Optional<Supplier> supplier = Optional.of(new Supplier());
+		Supplier supplier = new Supplier();
 		when(logisticService.findSupplierById(1)).thenReturn(supplier);
 		mockMvc.perform(delete("/deleteSupplier/1").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNoContent());
@@ -88,6 +88,20 @@ public class SupplierControllerTest {
 	public void testDeleteSupplierIdNotFound() throws Exception {
 		when(logisticService.findSupplierById(1)).thenReturn(null);
 		mockMvc.perform(delete("/deleteSupplier/1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void testFindSupplierByIdSuccess() throws Exception {
+		Supplier supplier = new Supplier();
+		when(logisticService.findSupplierById(1)).thenReturn(supplier);
+		mockMvc.perform(get("/findSupplierById/1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testFindSupplierByIdNotFound() throws Exception {
+		when(logisticService.findSupplierById(5)).thenReturn(null);
+		mockMvc.perform(get("/findSupplierById/5").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound());
 	}
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -46,7 +47,6 @@ public class SupplierController {
 
 		logger.info("Creating Supplier : {}", supplier);
 		if (logisticService.findSupplierByName(supplier.getName()) != null) {
-
 			logger.error("Unable to create. A Supplier with name {} already exist", supplier.getName());
 			return new ResponseEntity<Supplier>(HttpStatus.CONFLICT);
 		}
@@ -60,9 +60,8 @@ public class SupplierController {
 	public ResponseEntity<Supplier> deleteSupplier(@PathVariable long id) {
 
 		logger.info("Fetching & Deleting Supplier with id {}", id);
-		Optional<Supplier> supplier = logisticService.findSupplierById(id);
+		Supplier supplier = logisticService.findSupplierById(id);
 		if (supplier == null) {
-
 			logger.error("Unable to delete. Supplier with id {} not found.", id);
 			return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
 		}
@@ -72,17 +71,32 @@ public class SupplierController {
 
 	// -------------------Retrieve Single Supplier-----------------------
 
-	@GetMapping("/findSupplierById")
+	@GetMapping("/findSupplierById/{id}")
 	public ResponseEntity<?> findSupplierById(@PathVariable long id) {
 
 		logger.info("Finding Supplier with id {}", id);
-		Optional<Supplier> supplier = logisticService.findSupplierById(id);
+		Supplier supplier = logisticService.findSupplierById(id);
 		if (supplier == null) {
-
 			logger.error("Supplier with id {} not found", id);
 			return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Supplier>(HttpStatus.OK);
+	}
+
+	// -------------------Update a Supplier-----------------------
+
+	@PutMapping("/updateSupplier/{id}")
+	public ResponseEntity<Supplier> updateSupplier(@PathVariable long id, Supplier supplier) {
+
+		logger.info("Updating Supplier with id{}", id);
+		Supplier currentSupplier = logisticService.findSupplierById(id);
+		if (currentSupplier == null) {
+			logger.error("Supplier with id {} not found", id);
+			return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
+		}
+		currentSupplier.setName(supplier.getName());
+		logisticService.updateSupplier(currentSupplier);
+		return new ResponseEntity<Supplier>(currentSupplier, HttpStatus.OK);
 	}
 
 }

@@ -18,7 +18,7 @@ public interface LogisticService {
 
 	List<Supplier> findSuppliers();
 
-	Optional<Supplier> findSupplierById(long id);
+	Supplier findSupplierById(long id);
 
 	List<Supplier> findSupplierByName(String name);
 

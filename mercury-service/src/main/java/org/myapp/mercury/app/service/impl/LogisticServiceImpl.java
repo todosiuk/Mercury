@@ -42,8 +42,8 @@ public class LogisticServiceImpl implements LogisticService {
 	}
 
 	@Override
-	public Optional<Supplier> findSupplierById(final long id) {
-		return Optional.ofNullable(supplierRepository.findById(id));
+	public Supplier findSupplierById(final long id) {
+		return supplierRepository.findById(id);
 	}
 
 	public List<Supplier> findSupplierByName(String name) {
