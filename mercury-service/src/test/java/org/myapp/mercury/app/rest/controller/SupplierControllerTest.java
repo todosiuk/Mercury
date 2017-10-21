@@ -4,6 +4,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
@@ -101,8 +102,24 @@ public class SupplierControllerTest {
 	@Test
 	public void testFindSupplierByIdNotFound() throws Exception {
 		when(logisticService.findSupplierById(5)).thenReturn(null);
-		mockMvc.perform(get("/findSupplierById/5").accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isNotFound());
+		mockMvc.perform(get("/findSupplierById/5").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+	}
+
+	@Test
+	public void testUpdateSupplierSuccess() throws Exception {
+		Supplier supplier = new Supplier();
+		supplier.setName("test");
+		logisticService.updateSupplier(supplier);
+		when(logisticService.findSupplierById(5)).thenReturn(supplier);
+
+		Mockito.verify(logisticService).updateSupplier(supplier);
+		mockMvc.perform(put("/updateSupplier/5").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+	}
+
+	@Test
+	public void testUpdateSupplierNotFound() throws Exception {
+		when(logisticService.findSupplierById(5)).thenReturn(null);
+		mockMvc.perform(put("/updateSupplier/5").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
 	}
 
 }
