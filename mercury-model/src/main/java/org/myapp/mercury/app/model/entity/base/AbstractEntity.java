@@ -24,7 +24,7 @@ public abstract class AbstractEntity {
 	/**
 	 * Unique entity identifier
 	 */
-	private int id;
+	private long id;
 	/**
 	 * Timestamp of entity creation
 	 */
@@ -44,11 +44,11 @@ public abstract class AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -90,6 +90,8 @@ public abstract class AbstractEntity {
 		this.modifiedBy = modifiedBy;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,7 +99,7 @@ public abstract class AbstractEntity {
 		result = prime * result + ((LastModified == null) ? 0 : LastModified.hashCode());
 		result = prime * result + ((createdBy == null) ? 0 : createdBy.hashCode());
 		result = prime * result + ((firstCreated == null) ? 0 : firstCreated.hashCode());
-		result = prime * result + id;
+		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((modifiedBy == null) ? 0 : modifiedBy.hashCode());
 		return result;
 	}

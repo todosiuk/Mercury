@@ -18,19 +18,21 @@ public interface LogisticService {
 
 	List<Supplier> findSuppliers();
 
-	Optional<Supplier> findSupplierById(int id);
+	Supplier findSupplierById(long id);
+
+	List<Supplier> findSupplierByName(String name);
 
 	void saveSupplier(Supplier supplier);
 
 	List<Supply> findSuppliesByCriteria(SupplyCriteria criteria, RangeCriteria rangeCriteria);
 
-	void deleteSupplier(int id);
+	void deleteSupplier(long id);
 
 	void updateSupplier(Supplier supplier);
 
-	void saveSupply(int supplierId, Supply supply);
+	void saveSupply(long supplierId, Supply supply);
 
-	void deleteSupply(int id);
+	void deleteSupply(long id);
 
 	void updateSupply(Supply supply);
 

@@ -81,15 +81,15 @@ public class LogisticServiceImplTest {
 		supplier.setFirstCreated(LocalDateTime.now());
 		service.saveSupplier(supplier);
 
-		Optional<Supplier> foundSuppliers = service.findSupplierById(supplier.getId());
-		assertTrue(foundSuppliers.isPresent());
-		assertEquals(foundSuppliers.get().getId(), supplier.getId());
+		Supplier foundSuppliers = service.findSupplierById(supplier.getId());
+		//assertTrue(foundSuppliers.);
+		assertEquals(foundSuppliers.getId(), supplier.getId());
 	}
 
 	@Test
 	public void testFindSupplierByIdNotFound() {
-		Optional<Supplier> suppliers = service.findSupplierById(156);
-		assertFalse(suppliers.isPresent());
+		Supplier suppliers = service.findSupplierById(156);
+		assertNull(suppliers);
 	}
 
 	@Test
@@ -395,6 +395,22 @@ public class LogisticServiceImplTest {
 				new RangeCriteria(1, 5));
 		assertNotNull(supplies);
 		assertTrue(supplies.isEmpty());
+	}
+
+	@Test
+	public void testFindSupplierByNameSuccess() {
+		Supplier supplier = createSupplier();
+		service.saveSupplier(supplier);
+		List<Supplier> findedSupplier = service.findSupplierByName("test");
+
+		assertNotNull(findedSupplier);
+	}
+
+	@Test
+	public void testFindSupplierByNameNotFound() {
+		List<Supplier> findedSupplier = service.findSupplierByName("test1");
+
+		assertEquals(findedSupplier.size(),0);
 	}
 
 	private Supplier createSupplier() {

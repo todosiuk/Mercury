@@ -18,3 +18,5 @@ alter table SUPPLIER add constraint FKf1ovwe1gt81p4du64yfmbfo1h foreign key (MOD
 alter table SUPPLY add constraint FKcvv6w5ejrml8v85sgqqsv1r3g foreign key (CREATED_BY) references ACCOUNT (id);
 alter table SUPPLY add constraint FK206oa0h867i5f62tu92qwxcbl foreign key (MODIFIED_BY) references ACCOUNT (id);
 alter table SUPPLY add constraint FK6qv2xhybk3g4dp68y4edu54n foreign key (SUPPLIER_ID) references SUPPLIER (id);
+insert into supplier (id, FIRST_CREATED, name) VALUES(1, now(), "test");
+insert into supply(id, FIRST_CREATED, CAR_NUMBER,DRIVER_NAME,PHONE) VALUES(1,now(),"AA26-30CF","Пяточкин Петя","097-112-54-87");
