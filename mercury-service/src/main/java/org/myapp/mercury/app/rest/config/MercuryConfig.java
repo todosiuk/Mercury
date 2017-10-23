@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@ComponentScans(value = { @ComponentScan("org.myapp.mercury.app") })
+@ComponentScan("org.myapp.mercury.app")
 public class MercuryConfig {
 
 	@Autowired

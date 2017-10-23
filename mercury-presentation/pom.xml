@@ -9,6 +9,14 @@
 	<artifactId>mercury-presentation</artifactId>
 	<packaging>war</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>org.myapp</groupId>
+			<artifactId>mercury-service</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -23,9 +31,6 @@
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.2</version>
-				<configuration>
-					<path>/</path>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

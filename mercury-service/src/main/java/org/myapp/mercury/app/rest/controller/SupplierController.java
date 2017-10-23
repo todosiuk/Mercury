@@ -1,20 +1,17 @@
 package org.myapp.mercury.app.rest.controller;
 
 import java.util.List;
-import java.util.Optional;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.service.LogisticService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -31,7 +28,7 @@ public class SupplierController {
 
 	// -------------------Retrieve All Suppliers------------------------
 
-	@GetMapping("/suppliers")
+	@RequestMapping(value = "/suppliers", method = RequestMethod.GET)
 	public ResponseEntity<List<Supplier>> findSuppliers() {
 		List<Supplier> suppliers = logisticService.findSuppliers();
 		if (suppliers.isEmpty()) {
@@ -42,7 +39,7 @@ public class SupplierController {
 
 	// -------------------Create a Supplier-----------------------------
 
-	@PostMapping("/saveSupplier")
+	@RequestMapping(value = "/saveSupplier", method = RequestMethod.POST)
 	public ResponseEntity<?> saveSupplier(Supplier supplier) {
 
 		logger.info("Creating Supplier : {}", supplier);
@@ -56,7 +53,7 @@ public class SupplierController {
 
 	// -------------------Delete a Supplier--------------------------
 
-	@DeleteMapping("/deleteSupplier/{id}")
+	@RequestMapping(value = "/deleteSupplier/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Supplier> deleteSupplier(@PathVariable long id) {
 
 		logger.info("Fetching & Deleting Supplier with id {}", id);
@@ -71,7 +68,7 @@ public class SupplierController {
 
 	// -------------------Retrieve Single Supplier-----------------------
 
-	@GetMapping("/findSupplierById/{id}")
+	@RequestMapping(value = "/findSupplierById/{id}", method = RequestMethod.GET)
 	public ResponseEntity<?> findSupplierById(@PathVariable long id) {
 
 		logger.info("Finding Supplier with id {}", id);
@@ -85,7 +82,7 @@ public class SupplierController {
 
 	// -------------------Update a Supplier-----------------------
 
-	@PutMapping("/updateSupplier/{id}")
+	@RequestMapping(value = "/updateSupplier/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Supplier> updateSupplier(@PathVariable long id, Supplier supplier) {
 
 		logger.info("Updating Supplier with id{}", id);
