@@ -18,11 +18,12 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@ComponentScans(value = { @ComponentScan("org.myapp.mercury.app") })
+@ComponentScan("org.myapp.mercury.app")
 public class MercuryConfig {
 
 	@Autowired

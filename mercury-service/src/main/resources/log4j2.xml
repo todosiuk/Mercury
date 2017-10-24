@@ -9,7 +9,7 @@
 		</Console>
 	</Appenders>
 	<Loggers>
-		<logger name="org.itsimulator.germes" level="DEBUG">
+		<logger name="org.myapp.mercury" level="DEBUG">
 			<AppenderRef ref="fileLog" />
 		</logger>
 		<Root level="ERROR">

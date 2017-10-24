@@ -17,5 +17,6 @@ public class MercuryInitializer implements WebApplicationInitializer {
 		dynamic.addMapping("/");
 		dynamic.setLoadOnStartup(1);
 	}
+	
 
 }

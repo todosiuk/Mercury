@@ -37,7 +37,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = { MercuryConfig.class,
-		MercuryInitializer.class }, loader = AnnotationConfigContextLoader.class)
+		MercuryInitializer.class }, loader =AnnotationConfigContextLoader.class)
 @Transactional
 public class LogisticServiceImplTest {
 
