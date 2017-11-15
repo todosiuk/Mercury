@@ -10,11 +10,8 @@ import org.springframework.test.context.ActiveProfiles;
 @ComponentScan(basePackages = "org.myapp.mercury",
 
 		excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = { WebMvcConfig.class,
-				MercuryInitializer.class })
-
-)
+				MercuryInitializer.class }))
 @Import(MercuryConfig.class)
 @ActiveProfiles("integration-test")
 public class TestConfig {
-
 }
