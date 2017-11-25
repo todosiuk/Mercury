@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
+import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.persistence.repository.SupplierRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,6 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 	public Supplier findById(long supplierId) {
 		Supplier supplier = manager.find(Supplier.class, supplierId);
 		return supplier;
-
 	}
 
 	@Override
