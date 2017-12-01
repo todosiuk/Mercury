@@ -1,5 +1,9 @@
 package org.myapp.mercury.app.rest.controller;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.service.LogisticService;
 import org.slf4j.Logger;
@@ -29,9 +33,14 @@ public class SupplyController {
 	// -------------------Create a Supply-----------------------------
 
 	@RequestMapping(value = "/saveSupply/{id}", method = RequestMethod.POST)
-	public ResponseEntity<?> createSupply(@PathVariable long idSupplier, Supply supply) {
+	public ResponseEntity<?> createSupply(@PathVariable long id, Supply supply) {
 		logger.info("Creating Supply : {}", supply);
-		logisticService.saveSupply(idSupplier, supply);
+		Supplier supplier = logisticService.findSupplierById(id);
+		if (supplier == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		supply.setSupplier(supplier);
+		logisticService.saveSupplier(supplier);
 		return new ResponseEntity<>(supply, HttpStatus.CREATED);
 	}
 }
