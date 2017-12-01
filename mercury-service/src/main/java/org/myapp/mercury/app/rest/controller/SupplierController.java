@@ -26,15 +26,15 @@ public class SupplierController {
 	public SupplierController(LogisticService logisticService) {
 		this.logisticService = logisticService;
 	}
-	
-	 @RequestMapping("/")
-	    public String welcome() {//Welcome page, non-rest
-	        return "Welcome to RestTemplate Example.";
-	    }
+
+	@RequestMapping(value = "/")
+	public String welcome() {// Welcome page, non-rest
+		return "Welcome to RestTemplate Example.";
+	}
 
 	// -------------------Retrieve All Suppliers------------------------
 
-	@GetMapping("/suppliers")
+	@RequestMapping(value = "/suppliers", method = RequestMethod.GET)
 	public ResponseEntity<List<Supplier>> findSuppliers() {
 		List<Supplier> suppliers = logisticService.findSuppliers();
 		if (suppliers.isEmpty()) {

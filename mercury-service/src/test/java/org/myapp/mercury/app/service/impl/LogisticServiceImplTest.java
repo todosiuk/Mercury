@@ -20,6 +20,8 @@ import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 import org.myapp.mercury.app.model.search.criteria.range.RangeCriteria;
 import org.myapp.mercury.app.rest.config.MercuryConfig;
 import org.myapp.mercury.app.rest.config.MercuryInitializer;
+import org.myapp.mercury.app.rest.config.TestConfig;
+import org.myapp.mercury.app.rest.config.WebMvcConfig;
 import org.myapp.mercury.app.service.LogisticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -34,10 +36,9 @@ import org.springframework.transaction.annotation.Transactional;
  * @author todosuk
  *
  */
+@ContextConfiguration(classes=TestConfig.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(classes = { MercuryConfig.class,
-		MercuryInitializer.class }, loader =AnnotationConfigContextLoader.class)
 @Transactional
 public class LogisticServiceImplTest {
 
@@ -82,7 +83,7 @@ public class LogisticServiceImplTest {
 		service.saveSupplier(supplier);
 
 		Supplier foundSuppliers = service.findSupplierById(supplier.getId());
-		//assertTrue(foundSuppliers.);
+		// assertTrue(foundSuppliers.);
 		assertEquals(foundSuppliers.getId(), supplier.getId());
 	}
 
@@ -410,7 +411,7 @@ public class LogisticServiceImplTest {
 	public void testFindSupplierByNameNotFound() {
 		List<Supplier> findedSupplier = service.findSupplierByName("test1");
 
-		assertEquals(findedSupplier.size(),0);
+		assertEquals(findedSupplier.size(), 0);
 	}
 
 	private Supplier createSupplier() {
