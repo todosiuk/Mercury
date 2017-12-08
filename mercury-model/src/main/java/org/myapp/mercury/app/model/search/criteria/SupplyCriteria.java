@@ -22,6 +22,10 @@ public class SupplyCriteria {
 	private LocalDateTime firstCreatedEndDate;
 	private String supplierName;
 
+	public SupplyCriteria() {
+		super();
+	}
+
 	public SupplyCriteria(String str) {
 	}
 
