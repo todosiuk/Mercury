@@ -44,12 +44,14 @@ public class SupplyController {
 		return new ResponseEntity<>(supply, HttpStatus.CREATED);
 	}
 
+	// ----------------------Find supply by criteria-------------------
+
 	@RequestMapping(value = "/searchSupply", method = RequestMethod.POST)
 	public ResponseEntity<?> findSupply(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
 		logger.info("Finding supply by criteria : {}", criteria);
 		if (criteria == null) {
-			List<Supply> supplyes = logisticService.findAllSupplies();
-			return new ResponseEntity<>(supplyes, HttpStatus.OK);
+			List<Supply> supply = logisticService.findAllSupplies();
+			return new ResponseEntity<>(supply, HttpStatus.OK);
 		}
 		List<Supply> searchedSupply = logisticService.findSuppliesByCriteria(criteria, rangeCriteria);
 		return new ResponseEntity<>(searchedSupply, HttpStatus.FOUND);

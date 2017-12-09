@@ -13,19 +13,19 @@ public class RangeCriteria {
 	/**
 	 * page index (base page=0)
 	 */
-	private final int page;
+	private final int page = 0;
 
 	/**
 	 * Number of element per page
 	 */
-	private final int rowCount;
+	private final int rowCount = 0;
+
+	public RangeCriteria() {
+	}
 
 	public RangeCriteria(final int page, final int rowCount) {
 		Checks.checkParameter(page >= 0, "Incorrect page index:" + page);
 		Checks.checkParameter(rowCount >= 0, "Incorrect row count:" + rowCount);
-
-		this.page = page;
-		this.rowCount = rowCount;
 	}
 
 	public int getPage() {
