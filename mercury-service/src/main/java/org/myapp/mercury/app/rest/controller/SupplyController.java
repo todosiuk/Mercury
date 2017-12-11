@@ -1,6 +1,7 @@
 package org.myapp.mercury.app.rest.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
@@ -49,11 +50,45 @@ public class SupplyController {
 	@RequestMapping(value = "/searchSupply", method = RequestMethod.POST)
 	public ResponseEntity<?> findSupply(SupplyCriteria criteria, RangeCriteria rangeCriteria) {
 		logger.info("Finding supply by criteria : {}", criteria);
+
+		/*
+		 * if criteria == null search all supplies
+		 */
 		if (criteria == null) {
 			List<Supply> supply = logisticService.findAllSupplies();
 			return new ResponseEntity<>(supply, HttpStatus.OK);
 		}
 		List<Supply> searchedSupply = logisticService.findSuppliesByCriteria(criteria, rangeCriteria);
 		return new ResponseEntity<>(searchedSupply, HttpStatus.FOUND);
+	}
+
+	// ---------------------Update supply----------------------------------
+
+	@RequestMapping(value = "/updateSupply/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<?> updateSupply(@PathVariable long id, Supply supply) {
+		logger.info("Updating supply with id : {}", id);
+
+		Supply currentSupply = logisticService.findSupplyById(id);
+		if (currentSupply == null) {
+			logger.error("Supply with id {} not found", id);
+			return new ResponseEntity<Supplier>(HttpStatus.NOT_FOUND);
+		}
+		currentSupply.setCarNumber(supply.getCarNumber());
+		currentSupply.setCreatedBy(supply.getCreatedBy());
+		currentSupply.setDepartment(supply.getDepartment());
+		currentSupply.setDocumentReceiving(supply.getDocumentReceiving());
+		currentSupply.setDriverName(supply.getDriverName());
+		currentSupply.setFirstCreated(supply.getFirstCreated());
+		currentSupply.setLastModified(supply.getLastModified());
+		currentSupply.setModifiedBy(supply.getModifiedBy());
+		currentSupply.setPhone(supply.getPhone());
+		currentSupply.setProduct(supply.getProduct());
+		currentSupply.setStorekeeper(supply.getStorekeeper());
+		currentSupply.setSupplier(supply.getSupplier());
+
+		logisticService.updateSupply(currentSupply);
+
+		return new ResponseEntity<Supply>(currentSupply, HttpStatus.OK);
+
 	}
 }

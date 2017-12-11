@@ -38,4 +38,6 @@ public interface LogisticService {
 
 	List<Supply> findAllSupplies();
 
+	Supply findSupplyById(long id);
+
 }

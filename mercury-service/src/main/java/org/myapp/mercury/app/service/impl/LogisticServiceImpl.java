@@ -82,4 +82,8 @@ public class LogisticServiceImpl implements LogisticService {
 	public List<Supply> findAllSupplies() {
 		return supplyRepository.findAll();
 	}
+
+	public Supply findSupplyById(long id) {
+		return supplyRepository.findById(id);
+	}
 }
