@@ -3,6 +3,7 @@ package org.myapp.mercury.app.rest.controller;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static java.util.Arrays.asList;
 import java.util.List;
@@ -68,5 +69,17 @@ public class SupplyControllerTest {
 		List<Supply> list = asList(new Supply());
 		when(logisticService.findSuppliesByCriteria(criteria, rangeCriteria)).thenReturn(list);
 		mockMvc.perform(post("/searchSupply").accept(MediaType.APPLICATION_JSON)).andExpect(status().isFound());
+	}
+
+	@Test
+	public void testUpdateSupplyNotExist() throws Exception {
+		when(logisticService.findSupplyById(1)).thenReturn(null);
+		mockMvc.perform(put("/updateSupply/1").accept(MediaType.APPLICATION_JSON)).andExpect(status().isNotFound());
+	}
+	
+	@Test
+	public void testUpdateSupplySuccess() {
+		when(logisticService.findSupplyById(1)).thenReturn(new Supply());
+		
 	}
 }
