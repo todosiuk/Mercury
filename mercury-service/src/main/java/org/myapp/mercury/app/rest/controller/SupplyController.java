@@ -89,6 +89,5 @@ public class SupplyController {
 		logisticService.updateSupply(currentSupply);
 
 		return new ResponseEntity<Supply>(currentSupply, HttpStatus.OK);
-
 	}
 }

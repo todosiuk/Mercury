@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 
@@ -24,6 +26,8 @@ import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 @Table(name = "SUPPLIER")
 public class Supplier extends AbstractEntity {
 
+	@NotNull
+	@Max(32)
 	private String name;
 
 	private Set<Supply> supplyList;
