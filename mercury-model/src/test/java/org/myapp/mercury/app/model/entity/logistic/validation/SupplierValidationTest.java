@@ -24,13 +24,35 @@ public class SupplierValidationTest {
 	}
 
 	@Test
-	public void nameNotNullValidationSuccess() {
+	public void nameIsValid() {
 		Supplier supplier = new Supplier();
 		supplier.setName("Vasya");
 
 		Set<ConstraintViolation<Supplier>> constraintViolations = validator.validate(supplier);
 
+		assertEquals(0, constraintViolations.size());
+	}
+
+	@Test
+	public void nameTooShort() {
+		Supplier supplier = new Supplier();
+		supplier.setName("Va");
+
+		Set<ConstraintViolation<Supplier>> constraintViolations = validator.validate(supplier);
+
 		assertEquals(1, constraintViolations.size());
-		assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+		assertEquals("size must be between 3 and 32", constraintViolations.iterator().next().getMessage());
+	}
+
+	@Test
+	public void nameTooLong() {
+		Supplier supplier = new Supplier();
+		supplier.setName("Vakjhuyjgnhjhfnrythgujnfhyrewqhgtdb");// 35 symbols
+
+		Set<ConstraintViolation<Supplier>> constraintViolations = validator.validate(supplier);
+
+		assertEquals(1, constraintViolations.size());
+		assertEquals("size must be between 3 and 32", constraintViolations.iterator().next().getMessage());
+
 	}
 }

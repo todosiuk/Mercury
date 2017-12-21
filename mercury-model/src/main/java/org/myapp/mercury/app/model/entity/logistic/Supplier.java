@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 
@@ -27,7 +28,7 @@ import org.myapp.mercury.app.model.entity.base.AbstractEntity;
 public class Supplier extends AbstractEntity {
 
 	@NotNull
-	@Max(32)
+	@Size(min = 3, max = 32)
 	private String name;
 
 	private Set<Supply> supplyList;
