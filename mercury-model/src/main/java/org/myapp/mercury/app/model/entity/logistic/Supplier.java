@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,11 +36,10 @@ public class Supplier extends AbstractEntity {
 	}
 
 	public Supplier(String string) {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Supplier(String string, long i, LocalDateTime now) {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Column(name = "NAME", nullable = false, length = 32)

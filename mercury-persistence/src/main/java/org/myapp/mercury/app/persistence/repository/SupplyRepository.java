@@ -2,7 +2,6 @@ package org.myapp.mercury.app.persistence.repository;
 
 import java.util.List;
 
-import org.myapp.mercury.app.model.entity.logistic.Supplier;
 import org.myapp.mercury.app.model.entity.logistic.Supply;
 import org.myapp.mercury.app.model.search.criteria.SupplyCriteria;
 

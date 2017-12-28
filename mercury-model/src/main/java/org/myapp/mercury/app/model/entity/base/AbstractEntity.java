@@ -16,7 +16,7 @@ import org.myapp.mercury.app.model.entity.person.Account;
 /**
  * Base class for all business entities
  * 
- * @author Â
+ * @author todosuk
  *
  */
 @MappedSuperclass

@@ -59,7 +59,6 @@ public class Supply extends AbstractEntity {
 	}
 
 	public Supply() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Column(name = "CAR_NUMBER", nullable = false, length = 10)

@@ -1,7 +1,6 @@
 package org.myapp.mercury.app.model.search.criteria;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 /**
  * Filtering criteria for search operation
